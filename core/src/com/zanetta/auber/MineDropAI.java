@@ -1,5 +1,4 @@
-package com.zanetta.auber;
+package com.mygdx.game;
 
-public interface MineDropAI {
-
+public class MineDropAI {
 }

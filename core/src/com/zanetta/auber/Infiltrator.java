@@ -1,29 +1,30 @@
-package com.zanetta.auber;
+package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Queue;
 
+
 public class Infiltrator extends Actor{
-	private TextureRegion textureRegion;
+    private TextureRegion region;
 
 
-    public  Infiltrator(TextureRegion textureRegion){
+    public  Infiltrator(TextureRegion region){
         super();
-        this.textureRegion = textureRegion;
-        setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
+        this.region = region;
+        setSize(this.region.getRegionWidth(), this.region.getRegionHeight());
     }
 
 
     public TextureRegion getRegion(){
-        return textureRegion;
+        return region;
     }
 
 
-    public void setRegion(TextureRegion textureRegion){
-        this.textureRegion = textureRegion;
-        setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
+    public void setRegion(TextureRegion region){
+        this.region = region;
+        setSize(this.region.getRegionWidth(), this.region.getRegionHeight());
     }
 
     @Override
@@ -35,11 +36,19 @@ public class Infiltrator extends Actor{
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        if (textureRegion == null || !isVisible()){
+        if (region == null || !isVisible()){
             return;
         }
 
-        batch.draw(textureRegion,
+    /* batch.draw(
+				region,
+				x, y,
+				originX, originY,
+				width, height,
+				scaleX, scaleY,
+				rotation
+		);*/
+        batch.draw(region,
                 getX(), getY(),
                 getOriginX(), getOriginY(),
                 getWidth(), getHeight(),

@@ -1,38 +1,44 @@
-package com.zanetta.auber;
+package com.mygdx.game;
 
 public class Health {
-	int health;
-    int maxHealth;
+
+    int Health;
+    int MaxHealth;
 
     public void setHealth(int HP){
-        this.health = HP;
+        this.Health = HP;
     }
 
 
     public void setMaxHealth(int HP){
-        this.maxHealth = HP;
+        this.MaxHealth = HP;
     }
 
+
     public int getMaxHealth(){
-        return this.maxHealth;
+        return this.MaxHealth;
     }
 
 
     public int getHealth(){
-        return this.health;
+        return this.Health;
     }
 
-    public void increaseHealth(int value){
-        this.health += value;
-        if(this.health > this.maxHealth){
-            this.health = this.maxHealth;
+
+    public void increaseHealth(int Value){
+        this.Health += Value;
+        if(this.Health > this.MaxHealth){
+            this.Health = this.MaxHealth;
         }
     }
 
-    public void decreaseHealth(int value){
-        this.health = this.health - value;
-        if(this.health < 0){
-            this.health = 0;
+
+    public void decreaseHealth(int Value){
+        this.Health = this.Health - Value;
+        if(this.Health < 0){
+            this.Health = 0;
         }
     }
+
+
 }
