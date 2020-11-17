@@ -1,5 +1,4 @@
-package com.mygdx.game;
-
+package com.zanetta.auber;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Ringleader extends Infiltrator{

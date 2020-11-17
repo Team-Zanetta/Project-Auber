@@ -1,5 +1,4 @@
-package com.mygdx.game;
-
+package com.zanetta.auber;
 
 public class System {
 

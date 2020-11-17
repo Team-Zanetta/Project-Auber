@@ -1,5 +1,4 @@
-package com.mygdx.game;
-
+package com.zanetta.auber;
 import com.badlogic.gdx.Game;
 
 public class MainGame extends Game{
