@@ -9,7 +9,7 @@ public class Player extends Actor{
     private TextureRegion region;
 
 
-    public  Player(TextureRegion region){
+    public Player(TextureRegion region){
         super();
         this.region = region;
         setSize(this.region.getRegionWidth(), this.region.getRegionHeight());

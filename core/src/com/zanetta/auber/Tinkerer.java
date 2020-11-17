@@ -5,4 +5,6 @@ public class Tinkerer extends Infiltrator{
     public Tinkerer(TextureRegion region) {
         super(region);
     }
+
+
 }
