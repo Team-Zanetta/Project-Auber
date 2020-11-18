@@ -5,23 +5,12 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Queue;
 
-public class Infiltrator extends Actor{
+public class Infiltrator extends Actor implements Sprite{
 	private TextureRegion textureRegion;
 
 
     public  Infiltrator(TextureRegion textureRegion){
         super();
-        this.textureRegion = textureRegion;
-        setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
-    }
-
-
-    public TextureRegion getRegion(){
-        return textureRegion;
-    }
-
-
-    public void setRegion(TextureRegion textureRegion){
         this.textureRegion = textureRegion;
         setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
     }
@@ -63,4 +52,18 @@ public class Infiltrator extends Actor{
     public void PerformSabotage(){
         
     }
+
+
+	@Override
+	public TextureRegion getTextureRegion() {
+		return textureRegion;
+	}
+
+
+	@Override
+	public void setTextureRegion(TextureRegion textureRegion) {
+		this.textureRegion = textureRegion;
+        setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
+		
+	}
 }
