@@ -16,7 +16,7 @@ public class Textures {
 		return atlas.findRegion(textureName);
 	}
 	
-	public void dispose() {
+	public static void dispose() {
 		atlas.dispose();
 	}
 }

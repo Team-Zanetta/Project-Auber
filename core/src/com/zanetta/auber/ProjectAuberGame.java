@@ -6,17 +6,19 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class ProjectAuberGame extends ApplicationAdapter {
 	OrthographicCamera camera;
 	SpriteBatch batch;
-	Texture img;
+	TextureRegion img;
 	
 	@Override
 	public void create () {
 		camera = new OrthographicCamera(1280, 720);
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		Textures.importTextures("badlogicpack.atlas");
+		img = Textures.getTexture("badlogic");
 	}
 
 	@Override
@@ -31,6 +33,6 @@ public class ProjectAuberGame extends ApplicationAdapter {
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
+		Textures.dispose();
 	}
 }
