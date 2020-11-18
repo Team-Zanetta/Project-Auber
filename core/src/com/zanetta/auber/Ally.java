@@ -6,6 +6,10 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class Ally extends Actor implements Sprite{
 	private TextureRegion textureRegion;
 
+	public Ally(TextureRegion textureRegion) {
+		this.textureRegion = textureRegion;
+	}
+	
 	@Override
 	public TextureRegion getTextureRegion() {
 		return textureRegion;
