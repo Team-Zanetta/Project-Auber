@@ -7,7 +7,7 @@ import com.badlogic.gdx.utils.Queue;
 
 
 public class Infiltrator extends Actor{
-    private TextureRegion region;
+    TextureRegion region;
 
 
     public  Infiltrator(TextureRegion region){

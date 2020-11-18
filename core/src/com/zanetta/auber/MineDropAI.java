@@ -1,3 +1,17 @@
 package com.zanetta.auber;
-public class MineDropAI {
+
+import com.badlogic.gdx.ai.utils.random.*;
+
+public class MineDropAI{
+
+    public MineDropAI() {
+
+
+
+    }
+
+
+
+
+
 }

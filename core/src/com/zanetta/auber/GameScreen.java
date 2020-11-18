@@ -9,15 +9,21 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 public class GameScreen extends ScreenAdapter{
     private Texture mainTexture;
+    private Texture tinkererTexture;
+
     private Stage stage;
     private Player mainPlayer;
+    private Tinkerer tinkerer;
 
 
     public GameScreen(){
         mainTexture = new Texture(Gdx.files.internal("badlogic.jpg"));
+        tinkererTexture = new Texture(Gdx.files.internal("badlogic.jpg"));
         stage = new Stage(new StretchViewport(MainGame.WORLD_WIDTH, MainGame.WORLD_HEIGHT));
         mainPlayer = new Player((new TextureRegion(mainTexture)));
+        tinkerer = new Tinkerer((new TextureRegion(tinkererTexture)));
         stage.addActor(mainPlayer);
+        stage.addActor(tinkerer);
     }
 
     @Override
