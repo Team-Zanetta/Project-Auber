@@ -7,9 +7,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 public class Player extends Actor implements Sprite{
 	private TextureRegion textureRegion;
 	
-	public  Player(TextureRegion textureRegion){
+	public  Player(){
         super();
-        this.textureRegion = textureRegion;
+        this.textureRegion = Textures.getTexture("player");
         setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
     }
 
