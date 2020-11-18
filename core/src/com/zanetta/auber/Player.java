@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
-import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 
 public class Player extends Actor implements Sprite, InputProcessor{
 	private TextureRegion textureRegion;
