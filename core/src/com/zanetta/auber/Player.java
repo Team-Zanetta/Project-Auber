@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
+import com.badlogic.gdx.utils.Array;
 
 public class Player extends Actor implements Sprite, InputProcessor{
 	private TextureRegion textureRegion;
@@ -15,6 +16,7 @@ public class Player extends Actor implements Sprite, InputProcessor{
 	private float movementTime = 0.1f;
 	private float scannerSlowdown = 0.5f;
 	public boolean scanning;
+	private float scannerRadius = 500;
 
 	
 	public  Player(TextureRegion textureRegion){
@@ -47,8 +49,42 @@ public class Player extends Actor implements Sprite, InputProcessor{
             this.addAction(moveAction);
     	}
     	
+    	if(scanning) {
+    		scan();
+    	}
+    	
 //    	Executes actions
     	super.act(delta);
+    }
+    
+    private void scan() {
+    	float [] playerLocation = getCentrePoint();
+    	Array<Actor> actors = this.getStage().getActors();
+    	for (Actor actor : actors){
+    		if(actor instanceof Infiltrator) {
+    			Infiltrator infiltrator = (Infiltrator) actor;
+    			if(!infiltrator.getHasBeenScanned()) {
+	    			float [] infiltratorLocation = infiltrator.getCentrePoint();
+	    			
+	    			float dx = Math.abs(playerLocation[0] - infiltratorLocation[0]);
+	    			float dy = Math.abs(playerLocation[1] - infiltratorLocation[1]);
+	    			
+//    				Quick square check
+	    			if(dx < scannerRadius & dy < scannerRadius) {
+//    					Slower circle check
+	    				if(Math.sqrt(dx*dx+dy*dy) < scannerRadius) {
+	    					infiltrator.scan();
+	    				}
+	    			}
+    			}
+    		}
+    	}
+    }
+    
+    public float[] getCentrePoint() {
+    	float x = getX() + getWidth()/2;
+    	float y = getY() + getHeight()/2;
+    	return new float[] {x,y};
     }
 
 
