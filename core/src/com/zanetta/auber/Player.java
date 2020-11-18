@@ -11,17 +11,21 @@ import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 public class Player extends Actor implements Sprite, InputProcessor{
 	private TextureRegion textureRegion;
 	private float xVelocity, yVelocity;
-	private float movementDistance;
-	private float movementTime;
+	private float movementDistance = 2;
+	private float movementTime = 0.1f;
+	private float scannerSlowdown = 0.5f;
+	public boolean scanning;
+
 	
 	public  Player(TextureRegion textureRegion){
         super();
+//        Sets up textures
         this.textureRegion = textureRegion;
         setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
+//        Sets up default velocities
         xVelocity = 0;
         yVelocity = 0;
-        movementDistance = 2;
-        movementTime = 0.1f;
+//        Sets up input
         Gdx.input.setInputProcessor(this);
         
         
@@ -29,16 +33,26 @@ public class Player extends Actor implements Sprite, InputProcessor{
 
     @Override
     public void act(float delta) {
+    	
+//    	Creates movement actions if the keys are pressed
     	if(xVelocity != 0 || yVelocity != 0) {
+    		float factor = movementDistance;
+        	if(scanning) {
+        		factor = factor * scannerSlowdown;
+        	}
+        	
     		MoveByAction moveAction = new MoveByAction();
-            moveAction.setAmount(xVelocity, yVelocity);;
+            moveAction.setAmount(xVelocity * factor, yVelocity * factor);;
             moveAction.setDuration(movementTime);
             this.addAction(moveAction);
     	}
+    	
+//    	Executes actions
     	super.act(delta);
     }
 
 
+//    Draws the player
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
@@ -53,10 +67,10 @@ public class Player extends Actor implements Sprite, InputProcessor{
                 getScaleX(), getScaleY(),
                 getRotation());
     }
+    
     public Infiltrator enemyCarrying(){
         return null;
     }
-
 
     public Enum state(){
 
@@ -83,28 +97,40 @@ public class Player extends Actor implements Sprite, InputProcessor{
 
 	@Override
 	public boolean keyDown(int keycode) {
+//		Starts the scanner actions on next act if space is pressed
+		if(keycode == Keys.SPACE) {
+			scanning = true;
+		}
+		
+//		Sets the relative velocities on button presses 
 		if(keycode == Keys.RIGHT | keycode == Keys.D) {
-			xVelocity += movementDistance;
+			xVelocity += 1;
 		}if(keycode == Keys.LEFT | keycode == Keys.A) {
-			xVelocity -= movementDistance;
+			xVelocity -= 1;
 		}if(keycode == Keys.UP | keycode == Keys.W) {
-			yVelocity += movementDistance;
+			yVelocity += 1;
 		}if(keycode == Keys.DOWN | keycode == Keys.S) {
-			yVelocity -= movementDistance;
+			yVelocity -= 1;
 		}
 		return true;
 	}
 
 	@Override
 	public boolean keyUp(int keycode) {
+//		Ends scanning on space up
+		if(keycode == Keys.SPACE) {
+			scanning = false;
+		}
+		
+//		Reduces the relative velocities on button up
 		if(keycode == Keys.RIGHT | keycode == Keys.D) {
-			xVelocity += -movementDistance;
+			xVelocity += -1;
 		}if(keycode == Keys.LEFT | keycode == Keys.A) {
-			xVelocity -= -movementDistance;
+			xVelocity -= -1;
 		}if(keycode == Keys.UP | keycode == Keys.W) {
-			yVelocity += -movementDistance;
+			yVelocity += -1;
 		}if(keycode == Keys.DOWN | keycode == Keys.S) {
-			yVelocity -= -movementDistance;
+			yVelocity -= -1;
 		}
 			
 		return true;
