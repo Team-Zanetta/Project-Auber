@@ -35,6 +35,12 @@ public class Infiltrator extends Actor implements Sprite{
                 getScaleX(), getScaleY(),
                 getRotation());
     }
+    
+    public float[] getCentrePoint() {
+    	float x = getX() + getWidth()/2;
+    	float y = getY() + getHeight()/2;
+    	return new float[] {x,y};
+    }
 
 
     public Enum state(){
