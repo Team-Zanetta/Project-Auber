@@ -12,7 +12,7 @@ public class Infiltrator extends Actor implements Sprite{
     public  Infiltrator(TextureRegion textureRegion){
         super();
         this.textureRegion = textureRegion;
-        setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
+        setSize(this.textureRegion.getRegionWidth()/3, this.textureRegion.getRegionHeight()/3);
     }
 
     @Override
