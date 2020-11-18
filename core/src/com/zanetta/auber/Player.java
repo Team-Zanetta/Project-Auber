@@ -4,22 +4,11 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 
-public class Player extends Actor{
+public class Player extends Actor implements Sprite{
 	private TextureRegion textureRegion;
 	
 	public  Player(TextureRegion textureRegion){
         super();
-        this.textureRegion = textureRegion;
-        setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
-    }
-
-
-    public TextureRegion getRegion(){
-        return textureRegion;
-    }
-
-
-    public void setRegion(TextureRegion textureRegion){
         this.textureRegion = textureRegion;
         setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
     }
@@ -57,4 +46,19 @@ public class Player extends Actor{
     public void pickupDropEnemy(){
 
     }
+
+
+	@Override
+	public TextureRegion getTextureRegion() {
+		// TODO Auto-generated method stub
+		return textureRegion;
+	}
+
+
+	@Override
+	public void setTextureRegion(TextureRegion textureRegion) {
+		this.textureRegion = textureRegion;
+        setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
+		
+	}
 }
