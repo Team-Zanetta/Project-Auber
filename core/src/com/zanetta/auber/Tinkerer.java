@@ -2,23 +2,11 @@ package com.zanetta.auber;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.AfterAction;
-import com.badlogic.gdx.scenes.scene2d.actions.AlphaAction;
 import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
-import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
-import com.badlogic.gdx.scenes.scene2d.actions.ParallelAction;
 import com.badlogic.gdx.scenes.scene2d.actions.RepeatAction;
-import com.badlogic.gdx.scenes.scene2d.actions.RotateByAction;
-import com.badlogic.gdx.scenes.scene2d.actions.RotateToAction;
-import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
-import com.badlogic.gdx.scenes.scene2d.actions.ScaleByAction;
-import com.badlogic.gdx.scenes.scene2d.actions.ScaleToAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
-import com.badlogic.gdx.scenes.scene2d.actions.SizeByAction;
-import com.badlogic.gdx.scenes.scene2d.actions.SizeToAction;
 
 public class Tinkerer extends Infiltrator{
     private TextureRegion Mineregion;
@@ -89,7 +77,7 @@ public class Tinkerer extends Infiltrator{
                 this.addAction(action);
                 break;
             case dead:
-                
+
                 break;
 
         }

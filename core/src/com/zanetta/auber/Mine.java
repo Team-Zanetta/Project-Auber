@@ -68,7 +68,7 @@ public class Mine extends Actor {
     }
 
     public Player[] PlayerInRoom(){
-        //need a algorithm that return all Players in the room from Scanner, fight! Siyaam!
+        //need a algorithm that return all Players in the room from Scanner
         return new Player[0];
     }
 
@@ -98,12 +98,12 @@ public class Mine extends Actor {
             if(this.MineMode == 2){
                 if(this.DistanceTo(players) <= explode_distance){
                     //players.MOVE_SPEED_CHANGE(-5);
-                    //not created yet in player, fight! Harry!
+                    //not created yet in player, fight
                 }
             }
             else{
                 //Reduces amount of screen visible for a period of time
-                //need this algorithm from Screen, fight! Emily
+                //need this algorithm from Screen, fight
 
             }
         }
