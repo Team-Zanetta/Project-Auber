@@ -7,12 +7,14 @@ import com.badlogic.gdx.utils.Queue;
 
 public class Infiltrator extends Actor implements Sprite{
 	private TextureRegion textureRegion;
+	private boolean hasBeenScanned;
 
 
     public  Infiltrator(TextureRegion textureRegion){
         super();
         this.textureRegion = textureRegion;
         setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
+        hasBeenScanned = false;
     }
 
     @Override
@@ -34,6 +36,21 @@ public class Infiltrator extends Actor implements Sprite{
                 getWidth(), getHeight(),
                 getScaleX(), getScaleY(),
                 getRotation());
+    }
+    
+    public float[] getCentrePoint() {
+    	float x = getX() + getWidth()/2;
+    	float y = getY() + getHeight()/2;
+    	return new float[] {x,y};
+    }
+    
+    public void scan() {
+    	setTextureRegion(Textures.getTexture("EnemyScanned"));
+    	hasBeenScanned = true;
+    }
+    
+    public boolean getHasBeenScanned() {
+    	return hasBeenScanned;
     }
 
 

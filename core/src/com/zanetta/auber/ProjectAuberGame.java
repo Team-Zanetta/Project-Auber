@@ -14,11 +14,13 @@ public class ProjectAuberGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		camera = new OrthographicCamera(1280, 720);
-		Textures.importTextures("badlogicpack.atlas");
+		Textures.importTextures("Auber pack.atlas");
 		
 		stage = new Stage();
-		player = new Player(Textures.getTexture("badlogic"));
+		player = new Player(Textures.getTexture("Player"));
+		Infiltrator infiltrator = new Infiltrator(Textures.getTexture("Enemy"));
 		stage.addActor(player);
+		stage.addActor(infiltrator);
 	}
 
 	@Override

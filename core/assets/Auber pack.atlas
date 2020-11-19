@@ -1,0 +1,54 @@
+
+Auber pack.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Enemy
+  rotate: false
+  xy: 2, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+EnemyScanned
+  rotate: false
+  xy: 2004, 2004
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Player
+  rotate: false
+  xy: 36, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+zanetta
+  rotate: false
+  xy: 2, 36
+  size: 2000, 2000
+  orig: 2000, 2000
+  offset: 0, 0
+  index: -1
+
+Auber pack2.png
+size: 1024,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+astronaut
+  rotate: false
+  xy: 2, 260
+  size: 571, 1103
+  orig: 571, 1103
+  offset: 0, 0
+  index: -1
+badlogic
+  rotate: false
+  xy: 2, 2
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
