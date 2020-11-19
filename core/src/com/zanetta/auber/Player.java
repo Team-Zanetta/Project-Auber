@@ -17,7 +17,7 @@ public class Player extends Actor implements Sprite, InputProcessor{
 	private float movementTime = 0.1f;
 	private float scannerSlowdown = 0.5f;
 	public boolean scanning;
-	private float scannerRadius = 500;
+	private float scannerRadius = 100;
 	private float pickupRadius = 20;
 	private Infiltrator enemyCarrying;
 
@@ -66,20 +66,31 @@ public class Player extends Actor implements Sprite, InputProcessor{
     	for (Actor actor : actors){
     		if(actor instanceof Infiltrator) {
     			Infiltrator infiltrator = (Infiltrator) actor;
-    			if(!infiltrator.getHasBeenScanned()) {
-	    			float [] infiltratorLocation = infiltrator.getCentrePoint();
-	    			
-	    			float dx = Math.abs(playerLocation[0] - infiltratorLocation[0]);
-	    			float dy = Math.abs(playerLocation[1] - infiltratorLocation[1]);
-	    			
-//    				Quick square check
-	    			if(dx < scannerRadius & dy < scannerRadius) {
-//    					Slower circle check
-	    				if(Math.sqrt(dx*dx+dy*dy) < scannerRadius) {
-	    					infiltrator.scan();
-	    				}
-	    			}
+    			float [] infiltratorLocation = infiltrator.getCentrePoint();
+    			
+    			float dx = Math.abs(playerLocation[0] - infiltratorLocation[0]);
+    			float dy = Math.abs(playerLocation[1] - infiltratorLocation[1]);
+    			
+//    			Quick square check
+    			if(dx < scannerRadius & dy < scannerRadius) {
+//    				Slower circle check
+    				if(Math.sqrt(dx*dx+dy*dy) < scannerRadius) {
+    					infiltrator.scan();
+    					return;
+    				}
     			}
+//	    		If the infiltrator is not within the radius, they are unscanned (texture returns to normal)
+    			infiltrator.unScan();
+    		}
+    	}
+    }
+    
+    private void unScanAll() {
+    	Array<Actor> actors = this.getStage().getActors();
+    	for (Actor actor : actors){
+    		if(actor instanceof Infiltrator) {
+    			Infiltrator infiltrator = (Infiltrator) actor;
+    			infiltrator.unScan();
     		}
     	}
     }
@@ -190,6 +201,7 @@ public class Player extends Actor implements Sprite, InputProcessor{
 //		Ends scanning on space up
 		if(keycode == Keys.SPACE) {
 			scanning = false;
+			unScanAll();
 		}
 		
 //		Reduces the relative velocities on button up
