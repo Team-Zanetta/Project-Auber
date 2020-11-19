@@ -13,8 +13,7 @@ public class Infiltrator extends Actor implements Sprite{
     public  Infiltrator(TextureRegion textureRegion){
         super();
         this.textureRegion = textureRegion;
-//        TODO: Remove these divide by 4s, only here because my temporary sprite is huge - Harry
-        setSize(this.textureRegion.getRegionWidth()/4, this.textureRegion.getRegionHeight()/4);
+        setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
         hasBeenScanned = false;
     }
 
@@ -46,9 +45,7 @@ public class Infiltrator extends Actor implements Sprite{
     }
     
     public void scan() {
-    	//TODO: add actual been scanned behaviour here - need to change sprite? - Harry
-    	setX(getCentrePoint()[0]);
-    	setY(getCentrePoint()[1]);
+    	setTextureRegion(Textures.getTexture("EnemyScanned"));
     	hasBeenScanned = true;
     }
     
