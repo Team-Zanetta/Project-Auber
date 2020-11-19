@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 import com.badlogic.gdx.utils.Array;
+import com.zanetta.auber.Infiltrator.State;
 
 public class Player extends Actor implements Sprite, InputProcessor{
 	private TextureRegion textureRegion;
@@ -17,6 +18,8 @@ public class Player extends Actor implements Sprite, InputProcessor{
 	private float scannerSlowdown = 0.5f;
 	public boolean scanning;
 	private float scannerRadius = 500;
+	private float pickupRadius = 20;
+	private Infiltrator enemyCarrying;
 
 	
 	public  Player(TextureRegion textureRegion){
@@ -105,7 +108,7 @@ public class Player extends Actor implements Sprite, InputProcessor{
     }
     
     public Infiltrator enemyCarrying(){
-        return null;
+        return enemyCarrying;
     }
 
     public Enum state(){
@@ -114,7 +117,36 @@ public class Player extends Actor implements Sprite, InputProcessor{
     }
 
     public void pickupDropEnemy(){
-
+    	if(enemyCarrying == null) {
+	    	float [] playerLocation = getCentrePoint();
+	    	Array<Actor> actors = this.getStage().getActors();
+	    	for (Actor actor : actors){
+	    		if(actor instanceof Infiltrator) {
+	    			Infiltrator infiltrator = (Infiltrator) actor;
+	    			if(infiltrator.state() == State.INCAPACITATED) {
+	    				
+		    			float [] infiltratorLocation = infiltrator.getCentrePoint();
+		    			
+		    			float dx = Math.abs(playerLocation[0] - infiltratorLocation[0]);
+		    			float dy = Math.abs(playerLocation[1] - infiltratorLocation[1]);
+		    			
+	//    				Quick square check
+		    			if(dx < pickupRadius & dy < pickupRadius) {
+	//    					Slower circle check
+		    				if(Math.sqrt(dx*dx+dy*dy) < pickupRadius) {
+		    					infiltrator.setVisible(false);
+		    					enemyCarrying = infiltrator;
+		    				}
+		    			}
+	    			}
+	    		}
+	    	}
+    	}else {
+    		enemyCarrying.setX(getX());
+    		enemyCarrying.setY(getY());
+    		enemyCarrying.setVisible(true);
+    		enemyCarrying = null;
+    	}
     }
 
 
@@ -136,6 +168,8 @@ public class Player extends Actor implements Sprite, InputProcessor{
 //		Starts the scanner actions on next act if space is pressed
 		if(keycode == Keys.SPACE) {
 			scanning = true;
+		}if(keycode == Keys.CONTROL_RIGHT | keycode == Keys.E) {
+			pickupDropEnemy();
 		}
 		
 //		Sets the relative velocities on button presses 
