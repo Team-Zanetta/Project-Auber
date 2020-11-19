@@ -17,8 +17,8 @@ public class ProjectAuberGame extends ApplicationAdapter {
 		Textures.importTextures("Auber pack.atlas");
 		
 		stage = new Stage();
-		player = new Player(Textures.getTexture("badlogic"));
-		Infiltrator infiltrator = new Infiltrator(Textures.getTexture("astronaut"));
+		player = new Player(Textures.getTexture("Player"));
+		Infiltrator infiltrator = new Infiltrator(Textures.getTexture("Enemy"));
 		stage.addActor(player);
 		stage.addActor(infiltrator);
 	}
