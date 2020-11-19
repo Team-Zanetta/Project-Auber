@@ -9,7 +9,8 @@ public class Infiltrator extends Actor implements Sprite{
 	private TextureRegion textureRegion;
 	private boolean hasBeenScanned;
 
-    public  Infiltrator(TextureRegion region){
+
+    public  Infiltrator(TextureRegion textureRegion){
         super();
         this.textureRegion = textureRegion;
         setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
@@ -25,19 +26,11 @@ public class Infiltrator extends Actor implements Sprite{
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        if (region == null || !isVisible()){
+        if (textureRegion == null || !isVisible()){
             return;
         }
 
-    /* batch.draw(
-				region,
-				x, y,
-				originX, originY,
-				width, height,
-				scaleX, scaleY,
-				rotation
-		);*/
-        batch.draw(region,
+        batch.draw(textureRegion,
                 getX(), getY(),
                 getOriginX(), getOriginY(),
                 getWidth(), getHeight(),

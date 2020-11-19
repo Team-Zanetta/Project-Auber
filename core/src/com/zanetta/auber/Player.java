@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 import com.badlogic.gdx.utils.Array;
 
-
 public class Player extends Actor implements Sprite, InputProcessor{
 	private TextureRegion textureRegion;
 	private float xVelocity, yVelocity;
@@ -30,6 +29,7 @@ public class Player extends Actor implements Sprite, InputProcessor{
         yVelocity = 0;
 //        Sets up input
         Gdx.input.setInputProcessor(this);
+        
         
     }
 
@@ -92,20 +92,11 @@ public class Player extends Actor implements Sprite, InputProcessor{
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-
         if (textureRegion == null | !isVisible()){
             return;
         }
 
-    /* batch.draw(
-				region,
-				x, y,
-				originX, originY,
-				width, height,
-				scaleX, scaleY,
-				rotation
-		);*/
-        batch.draw(region,
+        batch.draw(textureRegion,
                 getX(), getY(),
                 getOriginX(), getOriginY(),
                 getWidth(), getHeight(),
