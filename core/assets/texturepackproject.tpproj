@@ -32,7 +32,7 @@ limitMemory=true
 useIndexes=true
 
 scaleFactors=[{suffix:"",factor:1,resampling:bicubic}]
-inputFiles=[{path:C:\\Users\\harry\\Downloads\\Spritesheet\\badlogic.jpg,type:Input,regionName:null},{path:C:\\Users\\harry\\Downloads\\Spritesheet\\zanetta.png,type:Input,regionName:null},{path:C:\\Users\\harry\\Downloads\\PinClipart.com_astronaut-clipart_4519331.png,type:Input,regionName:astronaut}]
+inputFiles=[{path:C:\\Users\\harry\\Downloads\\Spritesheet\\badlogic.jpg,type:Input,regionName:null},{path:C:\\Users\\harry\\Downloads\\Spritesheet\\zanetta.png,type:Input,regionName:null},{path:C:\\Users\\harry\\Downloads\\PinClipart.com_astronaut-clipart_4519331.png,type:Input,regionName:astronaut},{path:C:\\Users\\harry\\Downloads\\Enemy.png,type:Input,regionName:null},{path:C:\\Users\\harry\\Downloads\\EnemyScanned.png,type:Input,regionName:null},{path:C:\\Users\\harry\\Downloads\\Player.png,type:Input,regionName:null}]
 
 
 -PROJ-
