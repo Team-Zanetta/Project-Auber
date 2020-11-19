@@ -1,4 +1,5 @@
-package com.zanetta.auber;
+package com.mygdx.game;
+
 public class Health {
 
     int Health;

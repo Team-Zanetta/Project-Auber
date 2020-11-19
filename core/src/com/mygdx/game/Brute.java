@@ -1,4 +1,4 @@
-package com.zanetta.auber;
+package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
