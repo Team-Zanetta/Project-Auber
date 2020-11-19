@@ -5,26 +5,15 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.utils.Queue;
 
-
-public class Infiltrator extends Actor{
-    TextureRegion region;
-
+public class Infiltrator extends Actor implements Sprite{
+	private TextureRegion textureRegion;
+	private boolean hasBeenScanned;
 
     public  Infiltrator(TextureRegion region){
         super();
-        this.region = region;
-        setSize(this.region.getRegionWidth(), this.region.getRegionHeight());
-    }
-
-
-    public TextureRegion getRegion(){
-        return region;
-    }
-
-
-    public void setRegion(TextureRegion region){
-        this.region = region;
-        setSize(this.region.getRegionWidth(), this.region.getRegionHeight());
+        this.textureRegion = textureRegion;
+        setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
+        hasBeenScanned = false;
     }
 
     @Override
@@ -55,6 +44,21 @@ public class Infiltrator extends Actor{
                 getScaleX(), getScaleY(),
                 getRotation());
     }
+    
+    public float[] getCentrePoint() {
+    	float x = getX() + getWidth()/2;
+    	float y = getY() + getHeight()/2;
+    	return new float[] {x,y};
+    }
+    
+    public void scan() {
+    	setTextureRegion(Textures.getTexture("EnemyScanned"));
+    	hasBeenScanned = true;
+    }
+    
+    public boolean getHasBeenScanned() {
+    	return hasBeenScanned;
+    }
 
 
     public Enum state(){
@@ -72,4 +76,18 @@ public class Infiltrator extends Actor{
     public void PerformSabotage(){
         
     }
+
+
+	@Override
+	public TextureRegion getTextureRegion() {
+		return textureRegion;
+	}
+
+
+	@Override
+	public void setTextureRegion(TextureRegion textureRegion) {
+		this.textureRegion = textureRegion;
+        setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
+		
+	}
 }
