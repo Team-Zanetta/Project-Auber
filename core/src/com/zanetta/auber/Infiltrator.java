@@ -11,7 +11,7 @@ public class Infiltrator extends Actor implements Sprite{
 	
 	enum State{
 		IDLE,
-		INCAPACITATED 
+		INCAPACITATED
 	}
 	private State state;
 
