@@ -8,13 +8,19 @@ import com.badlogic.gdx.utils.Queue;
 public class Infiltrator extends Actor implements Sprite{
 	private TextureRegion textureRegion;
 	private boolean hasBeenScanned;
-
+	
+	enum State{
+		IDLE,
+		INCAPACITATED 
+	}
+	private State state;
 
     public  Infiltrator(TextureRegion textureRegion){
         super();
         this.textureRegion = textureRegion;
         setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
         hasBeenScanned = false;
+        state = State.IDLE;
     }
 
     @Override
@@ -49,6 +55,11 @@ public class Infiltrator extends Actor implements Sprite{
     	hasBeenScanned = true;
     }
     
+    public void unScan() {
+    	setTextureRegion(Textures.getTexture("Enemy"));
+    	hasBeenScanned = false;
+    }
+    
     public boolean getHasBeenScanned() {
     	return hasBeenScanned;
     }
@@ -56,7 +67,7 @@ public class Infiltrator extends Actor implements Sprite{
 
     public Enum state(){
 
-        return null;
+        return state;
     }
 
 
