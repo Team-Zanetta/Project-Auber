@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 import com.badlogic.gdx.utils.Array;
 import com.zanetta.auber.Infiltrator.State;
 
-public class Player extends Actor implements Sprite, InputProcessor{
+public class Player extends Actor implements Sprite, InputProcessor {
 	private TextureRegion textureRegion;
 	private float xVelocity, yVelocity;
 	private float movementDistance = 2;
@@ -21,130 +21,125 @@ public class Player extends Actor implements Sprite, InputProcessor{
 	private float pickupRadius = 20;
 	private Infiltrator enemyCarrying;
 
-	
-	public  Player(TextureRegion textureRegion){
-        super();
+	public Player(TextureRegion textureRegion) {
+		super();
 //        Sets up textures
-        this.textureRegion = textureRegion;
-        setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
+		this.textureRegion = textureRegion;
+		setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
 //        Sets up default velocities
-        xVelocity = 0;
-        yVelocity = 0;
+		xVelocity = 0;
+		yVelocity = 0;
 //        Sets up input
-        Gdx.input.setInputProcessor(this);
-    }
+		Gdx.input.setInputProcessor(this);
+	}
 
-    @Override
-    public void act(float delta) {
-    	
+	@Override
+	public void act(float delta) {
+
 //    	Creates movement actions if the keys are pressed
-    	if(xVelocity != 0 || yVelocity != 0) {
-    		float factor = movementDistance;
-        	if(scanning) {
-        		factor = factor * scannerSlowdown;
-        	}
-        	
-    		MoveByAction moveAction = new MoveByAction();
-            moveAction.setAmount(xVelocity * factor, yVelocity * factor);;
-            moveAction.setDuration(movementTime);
-            this.addAction(moveAction);
-    	}
-    	
-    	if(scanning) {
-    		scan();
-    	}
-    	
-//    	Executes actions
-    	super.act(delta);
-    }
-    
-    private void scan() {
-    	float [] playerLocation = getCentrePoint();
-    	Array<Actor> actors = this.getStage().getActors();
-    	for (Actor actor : actors){
-    		if(actor instanceof Infiltrator) {
-    			Infiltrator infiltrator = (Infiltrator) actor;
-    			float [] infiltratorLocation = infiltrator.getCentrePoint();
-    			
-    			float dx = Math.abs(playerLocation[0] - infiltratorLocation[0]);
-    			float dy = Math.abs(playerLocation[1] - infiltratorLocation[1]);
-    			
-//    			Quick square check
-    			if(dx < scannerRadius & dy < scannerRadius) {
-//    				Slower circle check
-    				if(Math.sqrt(dx*dx+dy*dy) < scannerRadius) {
-    					infiltrator.scan();
-    					return;
-    				}
-    			}
-//	    		If the infiltrator is not within the radius, they are unscanned (texture returns to normal)
-    			infiltrator.unScan();
-    		}
-    	}
-    }
-    
-    private void unScanAll() {
-    	Array<Actor> actors = this.getStage().getActors();
-    	for (Actor actor : actors){
-    		if(actor instanceof Infiltrator) {
-    			Infiltrator infiltrator = (Infiltrator) actor;
-    			infiltrator.unScan();
-    		}
-    	}
-    }
-    
-    public float[] getCentrePoint() {
-    	float x = getX() + getWidth()/2;
-    	float y = getY() + getHeight()/2;
-    	return new float[] {x,y};
-    }
+		if (xVelocity != 0 || yVelocity != 0) {
+			float factor = movementDistance;
+			if (scanning) {
+				factor = factor * scannerSlowdown;
+			}
 
+			MoveByAction moveAction = new MoveByAction();
+			moveAction.setAmount(xVelocity * factor, yVelocity * factor);
+			;
+			moveAction.setDuration(movementTime);
+			this.addAction(moveAction);
+		}
+
+		if (scanning) {
+			scan();
+		}
+
+//    	Executes actions
+		super.act(delta);
+	}
+
+	private void scan() {
+		float[] playerLocation = getCentrePoint();
+		Array<Actor> actors = this.getStage().getActors();
+		for (Actor actor : actors) {
+			if (actor instanceof Infiltrator) {
+				Infiltrator infiltrator = (Infiltrator) actor;
+				float[] infiltratorLocation = infiltrator.getCentrePoint();
+
+				float dx = Math.abs(playerLocation[0] - infiltratorLocation[0]);
+				float dy = Math.abs(playerLocation[1] - infiltratorLocation[1]);
+
+//    			Quick square check
+				if (dx < scannerRadius & dy < scannerRadius) {
+//    				Slower circle check
+					if (Math.sqrt(dx * dx + dy * dy) < scannerRadius) {
+						infiltrator.scan();
+						return;
+					}
+				}
+//	    		If the infiltrator is not within the radius, they are unscanned (texture returns to normal)
+				infiltrator.unScan();
+			}
+		}
+	}
+
+	private void unScanAll() {
+		Array<Actor> actors = this.getStage().getActors();
+		for (Actor actor : actors) {
+			if (actor instanceof Infiltrator) {
+				Infiltrator infiltrator = (Infiltrator) actor;
+				infiltrator.unScan();
+			}
+		}
+	}
+
+	public float[] getCentrePoint() {
+		float x = getX() + getWidth() / 2;
+		float y = getY() + getHeight() / 2;
+		return new float[] { x, y };
+	}
 
 //    Draws the player
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
-        if (textureRegion == null | !isVisible()){
-            return;
-        }
+	@Override
+	public void draw(Batch batch, float parentAlpha) {
+		super.draw(batch, parentAlpha);
+		if (textureRegion == null | !isVisible()) {
+			return;
+		}
 
-        batch.draw(textureRegion,
-                getX(), getY(),
-                getOriginX(), getOriginY(),
-                getWidth(), getHeight(),
-                getScaleX(), getScaleY(),
-                getRotation());
-    }
-    
-    public Infiltrator enemyCarrying(){
-        return enemyCarrying;
-    }
+		batch.draw(textureRegion, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(),
+				getScaleY(), getRotation());
+	}
 
-    public Enum state(){
+	public Infiltrator enemyCarrying() {
+		return enemyCarrying;
+	}
 
-        return null;
-    }
-    
-    private Infiltrator getNearestEnemy() {
-    	float [] playerLocation = getCentrePoint();
-    	Array<Actor> actors = this.getStage().getActors();
-    	float closestDistance = Float.MAX_VALUE;
-    	Infiltrator closestInfiltrator = null;
-    	for (Actor actor : actors){
-    		if(actor instanceof Infiltrator) {
-    			Infiltrator infiltrator = (Infiltrator) actor;
-    			float [] infiltratorLocation = infiltrator.getCentrePoint();
-    			float dx = Math.abs(playerLocation[0] - infiltratorLocation[0]);
-    			float dy = Math.abs(playerLocation[1] - infiltratorLocation[1]);
-    			float distance = (float)Math.sqrt(dx*dx + dy*dy);
-    			if(distance < closestDistance) {
-    				closestDistance = distance;
-    				closestInfiltrator = infiltrator;	
-    			}
-    		}
-    	}
-    	return closestInfiltrator;
-    }
+	public Enum state() {
+
+		return null;
+	}
+
+	private Infiltrator getNearestEnemy() {
+		float[] playerLocation = getCentrePoint();
+		Array<Actor> actors = this.getStage().getActors();
+		float closestDistance = Float.MAX_VALUE;
+		Infiltrator closestInfiltrator = null;
+		for (Actor actor : actors) {
+			if (actor instanceof Infiltrator) {
+				Infiltrator infiltrator = (Infiltrator) actor;
+				float[] infiltratorLocation = infiltrator.getCentrePoint();
+				float dx = Math.abs(playerLocation[0] - infiltratorLocation[0]);
+				float dy = Math.abs(playerLocation[1] - infiltratorLocation[1]);
+				float distance = (float) Math.sqrt(dx * dx + dy * dy);
+				if (distance < closestDistance) {
+					closestDistance = distance;
+					closestInfiltrator = infiltrator;
+				}
+			}
+		}
+		return closestInfiltrator;
+	}
 
 
 	private void pickupDropEnemy() {
@@ -179,7 +174,6 @@ public class Player extends Actor implements Sprite, InputProcessor{
 	public TextureRegion getTextureRegion() {
 		return textureRegion;
 	}
-
 
 	@Override
 	public void setTextureRegion(TextureRegion textureRegion) {
