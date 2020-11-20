@@ -4,27 +4,24 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 
-public class StartScreen implements Screen{
-    private MainGame MainGame;
-    private Texture logoTexture;
+public class Z_StartScreen implements Screen{
+    private Z_Launcher launcher;
     private Stage stage;
-    private Player logoActor;
+    private Actor logoActor;
     private float deltaSum;
 
 
-    public StartScreen(MainGame MainGame){
-        this.MainGame = MainGame;
-        logoTexture = new Texture(Gdx.files.internal("logo.png"));
-        stage = new Stage(new StretchViewport(MainGame.WORLD_WIDTH, MainGame.WORLD_HEIGHT));
-        logoActor = new Player(new TextureRegion(logoTexture));
+    public Z_StartScreen(Z_Launcher launcher){
+        this.launcher = launcher;
+        stage = new Stage();
+        logoActor = new Player(Textures.getTexture("zanetta"));
         logoActor.setWidth(logoActor.getWidth()/10);
         logoActor.setHeight(logoActor.getHeight()/10);
-
         logoActor.setPosition(stage.getWidth()/2 - logoActor.getWidth()/2, stage.getHeight()/2 - logoActor.getHeight()/2);
-
         stage.addActor(logoActor);
     }
 
@@ -36,12 +33,11 @@ public class StartScreen implements Screen{
 
     @Override
     public void render(float delta) {
-
         deltaSum += delta;
 
         if (deltaSum >= 1.0F){
-            if (MainGame != null){
-                MainGame.showGameScreen();
+            if (launcher != null){
+                launcher.showGameScreen();
                 return;
             }
         }
@@ -78,9 +74,5 @@ public class StartScreen implements Screen{
         if (stage != null){
             stage.dispose();
         }
-        if (logoTexture != null){
-            logoTexture.dispose();
-        }
-
     }
 }

@@ -2,6 +2,7 @@ package com.zanetta.auber.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.zanetta.auber.Z_Launcher;
 import com.zanetta.auber.ProjectAuberGame;
 
 public class DesktopLauncher {

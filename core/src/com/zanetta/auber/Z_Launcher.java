@@ -1,26 +1,27 @@
 package com.zanetta.auber;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Screen;
 
-public class MainGame extends Game{
+public class Z_Launcher extends Game{
 
     public static final float WORLD_WIDTH = 480;
     public static final float WORLD_HEIGHT = 800;
 
-    private StartScreen startScreen;
+    private Z_StartScreen startScreen;
 
-    private GameScreen gameScreen;
+    private ProjectAuberGame gameScreen;
 
     @Override
     public void create() {
-        startScreen = new StartScreen(this);
+    	Textures.importTextures("Auber pack.atlas");
+        startScreen = new Z_StartScreen(this);
+        gameScreen = new ProjectAuberGame();
 
-        gameScreen = new GameScreen();
-
-        setScreen(gameScreen);
+        setScreen(startScreen);
     }
 
     public void showGameScreen(){
-        setScreen(gameScreen);
+        setScreen((Screen) gameScreen);
         if (startScreen != null){
             startScreen.dispose();
             startScreen = null;
