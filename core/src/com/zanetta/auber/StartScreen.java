@@ -39,7 +39,7 @@ public class StartScreen implements Screen{
 
         deltaSum += delta;
 
-        if (deltaSum >= 3.0F){
+        if (deltaSum >= 1.0F){
             if (MainGame != null){
                 MainGame.showGameScreen();
                 return;
