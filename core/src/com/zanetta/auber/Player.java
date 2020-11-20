@@ -32,8 +32,6 @@ public class Player extends Actor implements Sprite, InputProcessor{
         yVelocity = 0;
 //        Sets up input
         Gdx.input.setInputProcessor(this);
-        
-        
     }
 
     @Override
@@ -125,6 +123,27 @@ public class Player extends Actor implements Sprite, InputProcessor{
     public Enum state(){
 
         return null;
+    }
+    
+    private Infiltrator getNearestEnemy() {
+    	float [] playerLocation = getCentrePoint();
+    	Array<Actor> actors = this.getStage().getActors();
+    	float closestDistance = Float.MAX_VALUE;
+    	Infiltrator closestInfiltrator = null;
+    	for (Actor actor : actors){
+    		if(actor instanceof Infiltrator) {
+    			Infiltrator infiltrator = (Infiltrator) actor;
+    			float [] infiltratorLocation = infiltrator.getCentrePoint();
+    			float dx = Math.abs(playerLocation[0] - infiltratorLocation[0]);
+    			float dy = Math.abs(playerLocation[1] - infiltratorLocation[1]);
+    			float distance = (float)Math.sqrt(dx*dx + dy*dy);
+    			if(distance < closestDistance) {
+    				closestDistance = distance;
+    				closestInfiltrator = infiltrator;	
+    			}
+    		}
+    	}
+    	return closestInfiltrator;
     }
 
     public void pickupDropEnemy(){
