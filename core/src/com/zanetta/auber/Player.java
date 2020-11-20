@@ -146,39 +146,34 @@ public class Player extends Actor implements Sprite, InputProcessor{
     	return closestInfiltrator;
     }
 
-    public void pickupDropEnemy(){
-    	if(enemyCarrying == null) {
-	    	float [] playerLocation = getCentrePoint();
-	    	Array<Actor> actors = this.getStage().getActors();
-	    	for (Actor actor : actors){
-	    		if(actor instanceof Infiltrator) {
-	    			Infiltrator infiltrator = (Infiltrator) actor;
-	    			if(infiltrator.state() == State.INCAPACITATED) {
-	    				
-		    			float [] infiltratorLocation = infiltrator.getCentrePoint();
-		    			
-		    			float dx = Math.abs(playerLocation[0] - infiltratorLocation[0]);
-		    			float dy = Math.abs(playerLocation[1] - infiltratorLocation[1]);
-		    			
-	//    				Quick square check
-		    			if(dx < pickupRadius & dy < pickupRadius) {
-	//    					Slower circle check
-		    				if(Math.sqrt(dx*dx+dy*dy) < pickupRadius) {
-		    					infiltrator.setVisible(false);
-		    					enemyCarrying = infiltrator;
-		    				}
-		    			}
-	    			}
-	    		}
-	    	}
-    	}else {
-    		enemyCarrying.setX(getX());
-    		enemyCarrying.setY(getY());
-    		enemyCarrying.setVisible(true);
-    		enemyCarrying = null;
-    	}
-    }
 
+	private void pickupDropEnemy() {
+		if (enemyCarrying == null) {
+			float[] playerLocation = getCentrePoint();
+			Infiltrator infiltrator = getNearestEnemy();
+			if (infiltrator.state() == State.INCAPACITATED) {
+				
+				float[] infiltratorLocation = infiltrator.getCentrePoint();
+				float dx = Math.abs(playerLocation[0] - infiltratorLocation[0]);
+				float dy = Math.abs(playerLocation[1] - infiltratorLocation[1]);
+				
+				// Quick square check
+				if (dx < pickupRadius & dy < pickupRadius) {
+					// Slower circle check
+					if (Math.sqrt(dx * dx + dy * dy) < pickupRadius) {
+						infiltrator.setVisible(false);
+						enemyCarrying = infiltrator;
+					}
+				}
+			}
+		}else{
+			//If carrying an enemy, drop them
+			enemyCarrying.setX(getX());
+			enemyCarrying.setY(getY());
+			enemyCarrying.setVisible(true);
+			enemyCarrying=null;
+		}
+	}
 
 	@Override
 	public TextureRegion getTextureRegion() {
