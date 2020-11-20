@@ -8,6 +8,8 @@ import com.badlogic.gdx.utils.Queue;
 public class Infiltrator extends Actor implements Sprite{
 	private TextureRegion textureRegion;
 	private boolean hasBeenScanned;
+	public Health health;
+	private int maxHP = 3;
 	
 	enum State{
 		IDLE,
@@ -21,11 +23,19 @@ public class Infiltrator extends Actor implements Sprite{
         setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
         hasBeenScanned = false;
         state = State.IDLE;
+        health = new Health();
+        health.setMaxHealth(maxHP);
+        health.setHealth(maxHP);
     }
 
     @Override
     public void act(float delta) {
         super.act(delta);
+        
+        if(health.getHealth() <= 0) {
+        	health.setHealth(0);
+        	state = State.INCAPACITATED;
+        }
     }
 
 
