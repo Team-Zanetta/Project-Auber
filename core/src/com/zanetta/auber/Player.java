@@ -176,9 +176,10 @@ public class Player extends Actor implements Sprite, InputProcessor {
 				}
 			}
 		}else{
-			//If carrying an enemy, drop them
+			//If carrying an infiltrator, drop them
 			infiltratorCarrying.setX(getX());
 			infiltratorCarrying.setY(getY());
+			infiltratorCarrying.setVisible(true);
 			infiltratorCarrying=null;
 		}
 	}
