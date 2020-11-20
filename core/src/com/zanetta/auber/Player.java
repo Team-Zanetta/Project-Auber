@@ -19,7 +19,7 @@ public class Player extends Actor implements Sprite, InputProcessor {
 	public boolean scanning;
 	private float scannerRadius = 100;
 	private float pickupRadius = 20;
-	private Infiltrator enemyCarrying;
+	private Infiltrator infiltratorCarrying;
 	private float attackRange = 50;
 	private int attackDamage = 1;
 
@@ -113,8 +113,8 @@ public class Player extends Actor implements Sprite, InputProcessor {
 				getScaleY(), getRotation());
 	}
 
-	public Infiltrator enemyCarrying() {
-		return enemyCarrying;
+	public Infiltrator infiltratorCarrying() {
+		return infiltratorCarrying;
 	}
 
 	public Enum state() {
@@ -122,7 +122,7 @@ public class Player extends Actor implements Sprite, InputProcessor {
 		return null;
 	}
 
-	private Infiltrator getNearestEnemy() {
+	private Infiltrator getNearestinfiltrator() {
 		float[] playerLocation = getCentrePoint();
 		Array<Actor> actors = this.getStage().getActors();
 		float closestDistance = Float.MAX_VALUE;
@@ -143,8 +143,8 @@ public class Player extends Actor implements Sprite, InputProcessor {
 		return closestInfiltrator;
 	}
 
-	private void attackEnemy() {
-		Infiltrator infiltrator = getNearestEnemy();
+	private void attackInfiltrator() {
+		Infiltrator infiltrator = getNearestinfiltrator();
 		float[] playerLocation = getCentrePoint();
 		float[] infiltratorLocation = infiltrator.getCentrePoint();
 		float dx = Math.abs(playerLocation[0] - infiltratorLocation[0]);
@@ -156,10 +156,10 @@ public class Player extends Actor implements Sprite, InputProcessor {
 		}
 	}
 
-	private void pickupDropEnemy() {
-		if (enemyCarrying == null) {
+	private void pickupDropInfiltrator() {
+		if (infiltratorCarrying == null) {
 			float[] playerLocation = getCentrePoint();
-			Infiltrator infiltrator = getNearestEnemy();
+			Infiltrator infiltrator = getNearestinfiltrator();
 			if (infiltrator.state() == State.INCAPACITATED) {
 				
 				float[] infiltratorLocation = infiltrator.getCentrePoint();
@@ -171,15 +171,15 @@ public class Player extends Actor implements Sprite, InputProcessor {
 					// Slower circle check
 					if (Math.sqrt(dx * dx + dy * dy) < pickupRadius) {
 						infiltrator.setVisible(false);
-						enemyCarrying = infiltrator;
+						infiltratorCarrying = infiltrator;
 					}
 				}
 			}
 		}else{
 			//If carrying an enemy, drop them
-			enemyCarrying.setX(getX());
-			enemyCarrying.setY(getY());
-			enemyCarrying=null;
+			infiltratorCarrying.setX(getX());
+			infiltratorCarrying.setY(getY());
+			infiltratorCarrying=null;
 		}
 	}
 
@@ -201,9 +201,9 @@ public class Player extends Actor implements Sprite, InputProcessor {
 		if(keycode == Keys.SPACE) {
 			scanning = true;
 		}if(keycode == Keys.CONTROL_RIGHT | keycode == Keys.E) {
-			pickupDropEnemy();
+			pickupDropInfiltrator();
 		}if(keycode == Keys.ALT_RIGHT | keycode == Keys.R) {
-			attackEnemy();
+			attackInfiltrator();
 		}
 		
 //		Sets the relative velocities on button presses 
