@@ -13,8 +13,7 @@ import com.zanetta.auber.Infiltrator.State;
 public class Player extends Actor implements Sprite, InputProcessor {
 	private TextureRegion textureRegion;
 	private float xVelocity, yVelocity;
-	private float movementDistance = 2;
-	private float movementTime = 0.1f;
+	private float movementSpeed = 2;
 	private float scannerSlowdown = 0.5f;
 	public boolean scanning;
 	private float scannerRadius = 100;
@@ -40,15 +39,16 @@ public class Player extends Actor implements Sprite, InputProcessor {
 
 //    	Creates movement actions if the keys are pressed
 		if (xVelocity != 0 || yVelocity != 0) {
-			float factor = movementDistance;
+			float speed = movementSpeed;
 			if (scanning) {
-				factor = factor * scannerSlowdown;
+				speed = speed * scannerSlowdown;
 			}
-
+			
+			float velocity = (float) Math.sqrt(xVelocity * xVelocity + yVelocity * yVelocity);
+			
 			MoveByAction moveAction = new MoveByAction();
-			moveAction.setAmount(xVelocity * factor, yVelocity * factor);
-			;
-			moveAction.setDuration(movementTime);
+			moveAction.setAmount(xVelocity/velocity * speed, yVelocity/velocity * speed);
+			
 			this.addAction(moveAction);
 		}
 
