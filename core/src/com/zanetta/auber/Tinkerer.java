@@ -82,28 +82,23 @@ public class Tinkerer extends Infiltrator{
         if(tinkerer_state == Tinkerer_state.wandering && wanderinglooptimecounter == 0){
             randonx = new Random();
             randony = new Random();
-            rn_x1 = randonx.nextInt(480);
-            rn_y1 = randony.nextInt(800);
-            SequenceAction sequenceAction = new SequenceAction(Actions.moveTo(rn_x1,rn_y1, duration), Actions.delay(3.0F));
-            addAction(sequenceAction);
+            rn_x1 = randonx.nextInt(400);
+            rn_y1 = randony.nextInt(700);
+            addAction(Actions.moveTo(rn_x1,rn_y1, duration));
         }
         wanderinglooptimecounter += deletaTime;
         if(wanderinglooptimecounter > duration){
+            addAction(Actions.delay(3.0F));
+            setMine(Mine.MineMode.explosive);
             wanderinglooptimecounter = 0;
         }
         Gdx.app.log("wanderinglooptimecounter", String.valueOf(wanderinglooptimecounter));
     }
 
 
-    public Action setMine(final Mine.MineMode mineMode){
-        return Actions.run(new Runnable() {
-            @Override
-            public void run() {
-                Mineregion = region;
-                Mine firstMine = new Mine(region);
-                firstMine.setPosition(getX(), getY());
-                Mine.setMineMode(mineMode);
-            }
-        });
+    public void setMine(Mine.MineMode mineMode){
+        Mine firstMine = new Mine(region);
+        firstMine.setPosition(getX(), getY());
+        Mine.setMineMode(mineMode);
     }
 }
