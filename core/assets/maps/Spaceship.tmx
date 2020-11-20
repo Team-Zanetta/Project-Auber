@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="32" tileheight="32" infinite="0" nextlayerid="2" nextobjectid="1">
+ <tileset firstgid="1" source="Base Tile.tsx"/>
+ <tileset firstgid="2801" source="Base Tile 2.tsx"/>
+ <tileset firstgid="2922" source="Wall.tsx"/>
+ <tileset firstgid="3494" source="Spacestation tileset.tsx"/>
+ <layer id="1" name="Tile Layer 1" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztmVtuwjAUBflvxdJgA/S73U83wFIbJJB4JM5Dds6EzsfVSC3Fks+ZxFZPH7vdVzcnieB3N7+fdefn+r3P7H53rjlD62yZp2sex32duXzXUP6XPay4zpnQ51Z+1Myj5EfNPAh91g/90A/90A/9IFA/WGzhR+nOoB/r+rHW6Adr9GPx8+rhZ/oReX8MTdU8CH3eiB+Dox8oP6rmQeizfugHNQ9Cn/VDP6h5EPrcyo+p+zjls6Xz7tjc7/fYEPrcwo+x3CrmMfl+8q79n+LHWG6pPAh91Q/90A8O9YNF/WDx1v+xIZ53CX1u4cf9fte4p5XyOHSf6Rvv549+rJ3H/d8syUQ/2uWxdB1Cn9/Zjzk56QfveUXo87v5cXiifuT9WLoOoc8b8eOWycudoZTHnHOwftSbvn2eey/Rj3pZlM5XU89a+jH7edU7fe/zpXkQ+kz3o9Tb2u9zQp+34MdQ/p6v9GNrTPjRep0tUz9Y1A8W1/bjuF/+P6j/5MfYvWHOlPxYY50tM90H+eoHoRdSP4hM90HqB5npPkj9IDPdB6kfZKb7IPWDzHQfpH6Qme6D1A8y032Q+kFmug9SP8hM90HqB5npPkj9IDPdB6kfZKb7IPWDzHQfpH6Qme6D1A8y032Q+kFmug9SP8hM90HqB5npPkj9IDPdB6kfZKb7IPWDzHQfpH6Qme6D1A8y032Q+kFmug9SP8hM90HqB5l/ozo8cg==
+  </data>
+ </layer>
+</map>
