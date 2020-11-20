@@ -1,7 +1,8 @@
 package com.zanetta.auber;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-
+import java.util.Random;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.*;
 
 public class Tinkerer extends Infiltrator{
@@ -51,45 +52,40 @@ public class Tinkerer extends Infiltrator{
                 getRotation());
     }
     public enum Tinkerer_state{
-        wandering, Mine_setting, escaping, dead,
+        wandering, escaping, dead,
     }
 
+
     public void set_Tinkerer_state(Tinkerer_state state){
+        Action wander;
         switch (state){
             case wandering:
-                setPosition(20,20);
-                SequenceAction sequence = Actions.sequence(Actions.moveTo(20,20, 2), Actions.moveTo(20,400, 2),Actions.moveTo(400,400, 2),Actions.moveTo(400,20, 2));
-                RepeatAction repeatAction = Actions.forever(sequence);
-                this.addAction(repeatAction);
-                break;
-            case Mine_setting:
-                DelayAction delay = Actions.delay(3.0F);
-                RunnableAction runnableAction2 = Actions.run(new Runnable() {
-                    @Override
-                    public void run() {
-                        set_Tinkerer_state(Tinkerer_state.wandering);
-                    }
-                });
-                SequenceAction sequenceAction = Actions.sequence(delay, runnableAction2);
-                this.addAction(sequenceAction);
+                Random rn_x1 = new Random();
+                Random rn_y1 = new Random();
+                wander = Actions.moveTo(rn_x1.nextInt(200),rn_y1.nextInt(400), 5);
+                SequenceAction sequenceAction1 = Actions.sequence(wander, Actions.delay(3.0F));
+                addAction(Actions.forever(sequenceAction1));
                 break;
             case escaping:
-                MoveToAction action = Actions.moveTo(20, 20, 2.0F);
-                this.addAction(action);
+                addAction(Actions.moveTo(20, 20, 2.0F));
                 break;
             case dead:
-
+                addAction(Actions.alpha(0, 0.5F));
                 break;
-
         }
     }
 
 
-    public void setMine(Mine.MineMode mineMode){
-        set_Tinkerer_state(Tinkerer_state.Mine_setting);
-        this.Mineregion = region;
-        new Mine(region).setPosition(this.getX(), this.getY());
-        Mine.setMineMode(mineMode);
+    public Action setMine(final Mine.MineMode mineMode){
+        return Actions.run(new Runnable() {
+            @Override
+            public void run() {
+                Mineregion = region;
+                Mine firstMine = new Mine(region);
+                firstMine.setPosition(getX(), getY());
+                Mine.setMineMode(mineMode);
+            }
+        });
     }
 
 

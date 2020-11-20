@@ -25,7 +25,7 @@ public class GameScreen extends ScreenAdapter{
 
         stage.addActor(tinkerer);
 
-
+        MineDropAI tinkererAI = new MineDropAI(tinkerer);
         //tinkerer.set_Tinkerer_state(Tinkerer.Tinkerer_state.wandering);
     }
 
@@ -35,7 +35,7 @@ public class GameScreen extends ScreenAdapter{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act();
         stage.draw();
-        new MineDropAI(tinkerer);
+
 
     }
 
