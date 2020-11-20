@@ -18,7 +18,7 @@ public class ProjectAuberGame extends ApplicationAdapter {
 		stage = new Stage();
 		Player player = new Player(Textures.getTexture("Player"));
 		Infiltrator infiltrator = new Infiltrator(Textures.getTexture("Enemy"));
-		Tinkerer tinkerer = new Tinkerer(Textures.getTexture("Enemy"));
+		Tinkerer tinkerer = new Tinkerer(Textures.getTexture("Tinkerer"));
 		stage.addActor(player);
 		stage.addActor(infiltrator);
 		stage.addActor(tinkerer);
