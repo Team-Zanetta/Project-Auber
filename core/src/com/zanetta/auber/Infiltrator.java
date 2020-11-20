@@ -2,7 +2,11 @@ package com.zanetta.auber;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer.Random;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
+import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.utils.Queue;
 
 public class Infiltrator extends Actor implements Sprite{
@@ -11,6 +15,8 @@ public class Infiltrator extends Actor implements Sprite{
 	private boolean hasBeenScanned;
 	public Health health;
 	private int maxHP = 3;
+	private float movementSpeed = 30;
+
 	
 	enum State{
 		IDLE,
@@ -32,12 +38,30 @@ public class Infiltrator extends Actor implements Sprite{
 
     @Override
     public void act(float delta) {
-        super.act(delta);
-        
         if(health.getHealth() <= 0) {
         	health.setHealth(0);
         	state = State.INCAPACITATED;
+        	this.clearActions();
+        } else {
+        	if(Math.random()<0.01) {
+        		moveTo((float)Math.random() * getStage().getWidth(), (float)Math.random() * getStage().getHeight());
+        	}
         }
+        super.act(delta);
+    }
+    
+    public void moveTo(float x, float y) {
+    	if(state != state.INCAPACITATED) {
+	    	MoveToAction moveAction = new MoveToAction();
+	    	moveAction.setPosition(x, y);
+	    	
+	    	float dx = Math.abs(x - getX());
+			float dy = Math.abs(y - getY());
+	    	float distance = (float) Math.sqrt(dx * dx + dy * dy);
+	    	
+	    	moveAction.setDuration(distance / movementSpeed);
+	    	addAction(moveAction);
+    	}
     }
 
 
