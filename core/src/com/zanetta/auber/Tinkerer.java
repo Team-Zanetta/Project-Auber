@@ -1,9 +1,11 @@
 package com.zanetta.auber;
 
+import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.actions.*;
 
 public class Tinkerer extends Infiltrator{
-    private TextureRegion Mineregion;
+    private TextureRegion region, Mineregion;
 
     public Tinkerer(TextureRegion region) {
         super(region);
