@@ -4,22 +4,12 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.actions.*;
 
-public class Tinkerer extends Infiltrator implements Sprite{
+public class Tinkerer extends Infiltrator{
     private TextureRegion textureRegion, Mineregion;
 
-    public Tinkerer(TextureRegion region) {
-        super(region);
+    public Tinkerer(String textureName) {
+        super(textureName);
         set_Tinkerer_state(Tinkerer_state.wandering);
-    }
-
-    public TextureRegion getRegion(){
-        return textureRegion;
-    }
-
-
-    public void setRegion(TextureRegion region){
-        this.textureRegion = region;
-        setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
     }
 
     @Override
@@ -35,14 +25,6 @@ public class Tinkerer extends Infiltrator implements Sprite{
             return;
         }
 
-    /* batch.draw(
-				region,
-				x, y,
-				originX, originY,
-				width, height,
-				scaleX, scaleY,
-				rotation
-		);*/
         batch.draw(textureRegion,
                 getX(), getY(),
                 getOriginX(), getOriginY(),

@@ -13,7 +13,7 @@ import com.zanetta.auber.Infiltrator.State;
 public class Player extends Actor implements Sprite, InputProcessor {
 	private TextureRegion textureRegion;
 	private float xVelocity, yVelocity;
-	private float movementSpeed = 2;
+	private float movementSpeed = 3;
 	private float scannerSlowdown = 0.5f;
 	public boolean scanning;
 	private float scannerRadius = 100;
@@ -76,11 +76,11 @@ public class Player extends Actor implements Sprite, InputProcessor {
 //    				Slower circle check
 					if (Math.sqrt(dx * dx + dy * dy) < scannerRadius) {
 						infiltrator.scan();
-						return;
 					}
+				}else {
+//			    	If the infiltrator is not within the radius, they are unscanned (texture returns to normal)
+					infiltrator.unScan();
 				}
-//	    		If the infiltrator is not within the radius, they are unscanned (texture returns to normal)
-				infiltrator.unScan();
 			}
 		}
 	}

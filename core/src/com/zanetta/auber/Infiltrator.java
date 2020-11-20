@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Queue;
 
 public class Infiltrator extends Actor implements Sprite{
 	private TextureRegion textureRegion;
+	private String textureName;
 	private boolean hasBeenScanned;
 	public Health health;
 	private int maxHP = 3;
@@ -17,9 +18,10 @@ public class Infiltrator extends Actor implements Sprite{
 	}
 	private State state;
 
-    public  Infiltrator(TextureRegion textureRegion){
+    public  Infiltrator(String textureName){
         super();
-        this.textureRegion = textureRegion;
+        this.textureName = textureName;
+        setTextureRegion(Textures.getTexture(textureName));
         setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
         hasBeenScanned = false;
         state = State.IDLE;
@@ -61,12 +63,12 @@ public class Infiltrator extends Actor implements Sprite{
     }
     
     public void scan() {
-    	setTextureRegion(Textures.getTexture("EnemyScanned"));
+    	setTextureRegion(Textures.getTexture(textureName+"Scanned"));
     	hasBeenScanned = true;
     }
     
     public void unScan() {
-    	setTextureRegion(Textures.getTexture("Enemy"));
+    	setTextureRegion(Textures.getTexture(textureName));
     	hasBeenScanned = false;
     }
     
