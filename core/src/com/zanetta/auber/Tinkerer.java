@@ -83,4 +83,11 @@ public class Tinkerer extends Infiltrator{
 
         }
     }
+    
+    public void setMine(Mine.MineMode mineMode){
+        set_Tinkerer_state(Tinkerer_state.Mine_setting);
+        this.Mineregion = region;
+        new Mine(region).setPosition(this.getX(), this.getY());
+        Mine.setMineMode(mineMode);
+    }
 }
