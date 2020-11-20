@@ -25,6 +25,20 @@ Player
   orig: 32, 32
   offset: 0, 0
   index: -1
+Tinkerer
+  rotate: false
+  xy: 2004, 1970
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+TinkererScanned
+  rotate: false
+  xy: 70, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 zanetta
   rotate: false
   xy: 2, 36
@@ -34,17 +48,10 @@ zanetta
   index: -1
 
 Auber pack2.png
-size: 1024,2048
+size: 512,512
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-astronaut
-  rotate: false
-  xy: 2, 260
-  size: 571, 1103
-  orig: 571, 1103
-  offset: 0, 0
-  index: -1
 badlogic
   rotate: false
   xy: 2, 2
