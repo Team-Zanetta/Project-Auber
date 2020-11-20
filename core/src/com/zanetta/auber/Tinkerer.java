@@ -1,4 +1,5 @@
 package com.zanetta.auber;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import java.util.Random;
@@ -10,6 +11,7 @@ public class Tinkerer extends Infiltrator{
 
     public Tinkerer(TextureRegion region) {
         super(region);
+        tinkerer_state = Tinkerer_state.wandering;
         setSize(this.region.getRegionWidth(), this.region.getRegionHeight());
     }
 
@@ -23,10 +25,6 @@ public class Tinkerer extends Infiltrator{
         setSize(this.region.getRegionWidth(), this.region.getRegionHeight());
     }
 
-    @Override
-    public void act(float delta) {
-        super.act(delta);
-    }
 
 
     @Override
@@ -56,15 +54,12 @@ public class Tinkerer extends Infiltrator{
     }
 
 
+
+    Tinkerer_state tinkerer_state;
     public void set_Tinkerer_state(Tinkerer_state state){
-        Action wander;
+        tinkerer_state = state;
         switch (state){
             case wandering:
-                Random rn_x1 = new Random();
-                Random rn_y1 = new Random();
-                wander = Actions.moveTo(rn_x1.nextInt(200),rn_y1.nextInt(400), 5);
-                SequenceAction sequenceAction1 = Actions.sequence(wander, Actions.delay(3.0F));
-                addAction(Actions.forever(sequenceAction1));
                 break;
             case escaping:
                 addAction(Actions.moveTo(20, 20, 2.0F));
@@ -73,6 +68,30 @@ public class Tinkerer extends Infiltrator{
                 addAction(Actions.alpha(0, 0.5F));
                 break;
         }
+    }
+
+    float wanderinglooptimecounter = 0;
+    float rn_x1;
+    float rn_y1;
+    Random randonx;
+    Random randony;
+    @Override
+    public void act(float deletaTime){
+        super.act(deletaTime);
+        float duration = 2.0f;
+        if(tinkerer_state == Tinkerer_state.wandering && wanderinglooptimecounter == 0){
+            randonx = new Random();
+            randony = new Random();
+            rn_x1 = randonx.nextInt(480);
+            rn_y1 = randony.nextInt(800);
+            SequenceAction sequenceAction = new SequenceAction(Actions.moveTo(rn_x1,rn_y1, duration), Actions.delay(3.0F));
+            addAction(sequenceAction);
+        }
+        wanderinglooptimecounter += deletaTime;
+        if(wanderinglooptimecounter > duration){
+            wanderinglooptimecounter = 0;
+        }
+        Gdx.app.log("wanderinglooptimecounter", String.valueOf(wanderinglooptimecounter));
     }
 
 
@@ -87,7 +106,4 @@ public class Tinkerer extends Infiltrator{
             }
         });
     }
-
-
-
 }

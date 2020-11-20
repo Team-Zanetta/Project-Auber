@@ -16,7 +16,7 @@ public class MainGame extends Game{
 
         gameScreen = new GameScreen();
 
-        setScreen(startScreen);
+        setScreen(gameScreen);
     }
 
     public void showGameScreen(){
