@@ -20,6 +20,8 @@ public class Player extends Actor implements Sprite, InputProcessor {
 	private float scannerRadius = 100;
 	private float pickupRadius = 20;
 	private Infiltrator enemyCarrying;
+	private float attackRange = 50;
+	private int attackDamage = 1;
 
 	public Player(TextureRegion textureRegion) {
 		super();
@@ -141,6 +143,18 @@ public class Player extends Actor implements Sprite, InputProcessor {
 		return closestInfiltrator;
 	}
 
+	private void attackEnemy() {
+		Infiltrator infiltrator = getNearestEnemy();
+		float[] playerLocation = getCentrePoint();
+		float[] infiltratorLocation = infiltrator.getCentrePoint();
+		float dx = Math.abs(playerLocation[0] - infiltratorLocation[0]);
+		float dy = Math.abs(playerLocation[1] - infiltratorLocation[1]);
+		float distance = (float) Math.sqrt(dx * dx + dy * dy);
+		
+		if(distance < attackRange) {
+			infiltrator.health.decreaseHealth(attackDamage);
+		}
+	}
 
 	private void pickupDropEnemy() {
 		if (enemyCarrying == null) {
@@ -165,7 +179,6 @@ public class Player extends Actor implements Sprite, InputProcessor {
 			//If carrying an enemy, drop them
 			enemyCarrying.setX(getX());
 			enemyCarrying.setY(getY());
-			enemyCarrying.setVisible(true);
 			enemyCarrying=null;
 		}
 	}
@@ -189,6 +202,8 @@ public class Player extends Actor implements Sprite, InputProcessor {
 			scanning = true;
 		}if(keycode == Keys.CONTROL_RIGHT | keycode == Keys.E) {
 			pickupDropEnemy();
+		}if(keycode == Keys.ALT_RIGHT | keycode == Keys.R) {
+			attackEnemy();
 		}
 		
 //		Sets the relative velocities on button presses 
