@@ -9,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 public class ProjectAuberGame extends ApplicationAdapter {
 	OrthographicCamera camera;
 	Stage stage;
-	Player player;
 	
 	@Override
 	public void create () {
@@ -17,10 +16,12 @@ public class ProjectAuberGame extends ApplicationAdapter {
 		Textures.importTextures("Auber pack.atlas");
 		
 		stage = new Stage();
-		player = new Player(Textures.getTexture("Player"));
+		Player player = new Player(Textures.getTexture("Player"));
 		Infiltrator infiltrator = new Infiltrator(Textures.getTexture("Enemy"));
+		Tinkerer tinkerer = new Tinkerer(Textures.getTexture("Enemy"));
 		stage.addActor(player);
 		stage.addActor(infiltrator);
+		stage.addActor(tinkerer);
 	}
 
 	@Override

@@ -4,22 +4,22 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.actions.*;
 
-public class Tinkerer extends Infiltrator{
-    private TextureRegion region, Mineregion;
+public class Tinkerer extends Infiltrator implements Sprite{
+    private TextureRegion textureRegion, Mineregion;
 
     public Tinkerer(TextureRegion region) {
         super(region);
-        setSize(this.region.getRegionWidth(), this.region.getRegionHeight());
+        set_Tinkerer_state(Tinkerer_state.wandering);
     }
 
     public TextureRegion getRegion(){
-        return region;
+        return textureRegion;
     }
 
 
     public void setRegion(TextureRegion region){
-        this.region = region;
-        setSize(this.region.getRegionWidth(), this.region.getRegionHeight());
+        this.textureRegion = region;
+        setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
     }
 
     @Override
@@ -31,7 +31,7 @@ public class Tinkerer extends Infiltrator{
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        if (region == null || !isVisible()){
+        if (textureRegion == null || !isVisible()){
             return;
         }
 
@@ -43,7 +43,7 @@ public class Tinkerer extends Infiltrator{
 				scaleX, scaleY,
 				rotation
 		);*/
-        batch.draw(region,
+        batch.draw(textureRegion,
                 getX(), getY(),
                 getOriginX(), getOriginY(),
                 getWidth(), getHeight(),
@@ -86,8 +86,8 @@ public class Tinkerer extends Infiltrator{
     
     public void setMine(Mine.MineMode mineMode){
         set_Tinkerer_state(Tinkerer_state.Mine_setting);
-        this.Mineregion = region;
-        new Mine(region).setPosition(this.getX(), this.getY());
+        this.Mineregion = Textures.getTexture("badlogic");
+        new Mine(Mineregion).setPosition(this.getX(), this.getY());
         Mine.setMineMode(mineMode);
     }
 }

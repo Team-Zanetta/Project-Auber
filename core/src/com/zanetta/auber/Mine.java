@@ -10,19 +10,19 @@ public class Mine extends Actor {
     //MineMode:1 = Explosive Mine, 2 = Teleport Mines, 3 = Slime Mine, 4 = Flashbang.
     private int MineMode = 1;
 
-    private final TextureRegion region;
+    private final TextureRegion textureRegion;
 
     public Mine(TextureRegion region){
         super();
-        this.region = region;
-        setSize(this.region.getRegionWidth(), this.region.getRegionHeight());
+        this.textureRegion = region;
+        setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
     }
 
     public static void setMineMode() {
     }
 
     public TextureRegion getRegion() {
-        return region;
+        return textureRegion;
     }
 
     @Override
@@ -32,10 +32,10 @@ public class Mine extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        if (region == null || !isVisible()){
+        if (textureRegion == null || !isVisible()){
             return;
         }
-        batch.draw(region,
+        batch.draw(textureRegion,
                 getX(), getY(),
                 getOriginX(), getOriginY(),
                 getWidth(), getHeight(),
