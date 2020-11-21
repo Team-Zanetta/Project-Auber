@@ -1,38 +1,38 @@
 
-Auber pack.png
+auberTextures.png
 size: 2048,2048
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-Enemy
-  rotate: false
-  xy: 2, 2
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-EnemyScanned
+infiltrator
   rotate: false
   xy: 2004, 2004
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-Player
+infiltratorScanned
   rotate: false
   xy: 36, 2
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-Tinkerer
+player
+  rotate: false
+  xy: 2, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+tinkerer
   rotate: false
   xy: 2004, 1970
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-TinkererScanned
+tinkererScanned
   rotate: false
   xy: 70, 2
   size: 32, 32
@@ -47,7 +47,7 @@ zanetta
   offset: 0, 0
   index: -1
 
-Auber pack2.png
+auberTextures2.png
 size: 512,512
 format: RGBA8888
 filter: Nearest,Nearest

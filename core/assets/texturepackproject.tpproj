@@ -1,4 +1,4 @@
-name=Auber pack
+name=auberTextures
 filename=
 output=.
 
@@ -32,7 +32,7 @@ limitMemory=true
 useIndexes=true
 
 scaleFactors=[{suffix:"",factor:1,resampling:bicubic}]
-inputFiles=[{path:C:\\Users\\harry\\Downloads\\Spritesheet\\badlogic.jpg,type:Input,regionName:null},{path:C:\\Users\\harry\\Downloads\\Spritesheet\\zanetta.png,type:Input,regionName:null},{path:C:\\Users\\harry\\Downloads\\Enemy.png,type:Input,regionName:null},{path:C:\\Users\\harry\\Downloads\\EnemyScanned.png,type:Input,regionName:null},{path:C:\\Users\\harry\\Downloads\\Player.png,type:Input,regionName:null},{path:C:\\Users\\harry\\Downloads\\Tinkerer.png,type:Input,regionName:null},{path:C:\\Users\\harry\\Downloads\\TinkererScanned.png,type:Input,regionName:null}]
+inputFiles=[{path:C:\\Users\\harry\\Downloads\\Spritesheet\\badlogic.jpg,type:Input,regionName:null},{path:C:\\Users\\harry\\Downloads\\Spritesheet\\zanetta.png,type:Input,regionName:null},{path:C:\\Users\\harry\\Downloads\\Enemy.png,type:Input,regionName:infiltrator},{path:C:\\Users\\harry\\Downloads\\EnemyScanned.png,type:Input,regionName:infiltratorScanned},{path:C:\\Users\\harry\\Downloads\\Player.png,type:Input,regionName:player},{path:C:\\Users\\harry\\Downloads\\Tinkerer.png,type:Input,regionName:tinkerer},{path:C:\\Users\\harry\\Downloads\\TinkererScanned.png,type:Input,regionName:tinkererScanned}]
 
 
 -PROJ-
