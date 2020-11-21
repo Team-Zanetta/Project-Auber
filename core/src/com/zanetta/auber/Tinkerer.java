@@ -82,8 +82,8 @@ public class Tinkerer extends Infiltrator{
         if(tinkerer_state == Tinkerer_state.wandering && wanderinglooptimecounter == 0){
             randonx = new Random();
             randony = new Random();
-            rn_x1 = randonx.nextInt(400);
-            rn_y1 = randony.nextInt(700);
+            rn_x1 = randonx.nextInt(1900);
+            rn_y1 = randony.nextInt(1000);
             addAction(Actions.moveTo(rn_x1,rn_y1, duration));
         }
         wanderinglooptimecounter += deletaTime;
@@ -93,6 +93,10 @@ public class Tinkerer extends Infiltrator{
             wanderinglooptimecounter = 0;
         }
         Gdx.app.log("wanderinglooptimecounter", String.valueOf(wanderinglooptimecounter));
+    }
+
+    public float getWanderinglooptimecounter(){
+        return wanderinglooptimecounter;
     }
 
 

@@ -3,8 +3,8 @@ import com.badlogic.gdx.Game;
 
 public class MainGame extends Game{
 
-    public static final float WORLD_WIDTH = 480;
-    public static final float WORLD_HEIGHT = 800;
+    public static final float WORLD_WIDTH = 1960;
+    public static final float WORLD_HEIGHT = 1080;
 
     private StartScreen startScreen;
 
@@ -16,7 +16,8 @@ public class MainGame extends Game{
 
         gameScreen = new GameScreen();
 
-        setScreen(gameScreen);
+        //setScreen(gameScreen);
+        setScreen(startScreen);
     }
 
     public void showGameScreen(){

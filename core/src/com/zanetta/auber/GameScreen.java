@@ -10,6 +10,7 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 public class GameScreen extends ScreenAdapter{
     private Texture mainTexture;
     private Texture tinkererTexture;
+    private Texture mineTexture;
     private Stage stage;
     private Player mainPlayer;
     private Tinkerer tinkerer;
@@ -18,6 +19,7 @@ public class GameScreen extends ScreenAdapter{
     public GameScreen(){
         mainTexture = new Texture(Gdx.files.internal("badlogic.jpg"));
         tinkererTexture = new Texture(Gdx.files.internal("badlogic.jpg"));
+        mineTexture = new Texture(Gdx.files.internal("badlogic.jpg"));
         stage = new Stage(new StretchViewport(MainGame.WORLD_WIDTH, MainGame.WORLD_HEIGHT));
         //mainPlayer = new Player((new TextureRegion(mainTexture)));
         tinkerer = new Tinkerer((new TextureRegion(tinkererTexture)));
@@ -35,6 +37,11 @@ public class GameScreen extends ScreenAdapter{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.act();
         stage.draw();
+        if(tinkerer.getWanderinglooptimecounter() == 0){
+            Mine Mine1 = new Mine((new TextureRegion(mineTexture)));
+            Mine1.setBounds(tinkerer.getX(), tinkerer.getY(), 100, 100);
+            stage.addActor(Mine1);
+        }
 
 
     }
