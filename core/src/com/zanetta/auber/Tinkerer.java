@@ -1,7 +1,9 @@
 package com.zanetta.auber;
-
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import java.util.Random;
+import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.*;
 
 public class Tinkerer extends Infiltrator{
@@ -21,7 +23,7 @@ public class Tinkerer extends Infiltrator{
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        if (textureRegion == null || !isVisible()){
+        if (region == null || !isVisible()){
             return;
         }
 
@@ -33,43 +35,52 @@ public class Tinkerer extends Infiltrator{
                 getRotation());
     }
     public enum Tinkerer_state{
-        wandering, Mine_setting, escaping, dead,
+        wandering, escaping, dead,
     }
 
+
+
+    Tinkerer_state tinkerer_state;
     public void set_Tinkerer_state(Tinkerer_state state){
+        tinkerer_state = state;
         switch (state){
             case wandering:
-                setPosition(20,20);
-                SequenceAction sequence = Actions.sequence(Actions.moveTo(20,20, 2), Actions.moveTo(20,400, 2),Actions.moveTo(400,400, 2),Actions.moveTo(400,20, 2));
-                RepeatAction repeatAction = Actions.forever(sequence);
-                this.addAction(repeatAction);
-                break;
-            case Mine_setting:
-                DelayAction delay = Actions.delay(3.0F);
-                RunnableAction runnableAction2 = Actions.run(new Runnable() {
-                    @Override
-                    public void run() {
-                        set_Tinkerer_state(Tinkerer_state.wandering);
-                    }
-                });
-                SequenceAction sequenceAction = Actions.sequence(delay, runnableAction2);
-                this.addAction(sequenceAction);
                 break;
             case escaping:
-                MoveToAction action = Actions.moveTo(20, 20, 2.0F);
-                this.addAction(action);
+                addAction(Actions.moveTo(20, 20, 2.0F));
                 break;
             case dead:
-
+                addAction(Actions.alpha(0, 0.5F));
                 break;
-
         }
     }
-    
-    public void setMine(Mine.MineMode mineMode){
-        set_Tinkerer_state(Tinkerer_state.Mine_setting);
-        this.Mineregion = Textures.getTexture("badlogic");
-        new Mine(Mineregion).setPosition(this.getX(), this.getY());
-        Mine.setMineMode(mineMode);
+
+    float wanderinglooptimecounter = 0;
+    float rn_x1;
+    float rn_y1;
+    Random randonx;
+    Random randony;
+    @Override
+    public void act(float deletaTime){
+        super.act(deletaTime);
+        float duration = 2.0f;
+        if(tinkerer_state == Tinkerer_state.wandering && wanderinglooptimecounter == 0){
+            randonx = new Random();
+            randony = new Random();
+            rn_x1 = randonx.nextInt(1900);
+            rn_y1 = randony.nextInt(1000);
+            addAction(Actions.moveTo(rn_x1,rn_y1, duration));
+        }
+        wanderinglooptimecounter += deletaTime;
+        if(wanderinglooptimecounter > duration){
+            wanderinglooptimecounter = 0;
+        }
+        //Gdx.app.log("wanderinglooptimecounter", String.valueOf(wanderinglooptimecounter));
     }
+
+    public float getWanderinglooptimecounter(){
+        return wanderinglooptimecounter;
+    }
+
+
 }

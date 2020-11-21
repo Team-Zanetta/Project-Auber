@@ -7,22 +7,19 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import java.util.Random;
 
 public class Mine extends Actor {
-    //MineMode:1 = Explosive Mine, 2 = Teleport Mines, 3 = Slime Mine, 4 = Flashbang.
-    private int MineMode = 1;
+    private static int MineMode;
+    //MineMode:0 = Explosive Mine, 1 = Teleport Mines, 2 = Slime Mine, 3 = Flashbang.
 
-    private final TextureRegion textureRegion;
+    private final TextureRegion region;
 
     public Mine(TextureRegion region){
         super();
-        this.textureRegion = region;
-        setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
-    }
-
-    public static void setMineMode() {
+        this.region = region;
+        setSize(this.region.getRegionWidth(), this.region.getRegionHeight());
     }
 
     public TextureRegion getRegion() {
-        return textureRegion;
+        return region;
     }
 
     @Override
@@ -32,10 +29,10 @@ public class Mine extends Actor {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        if (textureRegion == null || !isVisible()){
+        if (region == null || !isVisible()){
             return;
         }
-        batch.draw(textureRegion,
+        batch.draw(region,
                 getX(), getY(),
                 getOriginX(), getOriginY(),
                 getWidth(), getHeight(),
@@ -47,17 +44,8 @@ public class Mine extends Actor {
         explosive, teleport, slime, flashbang
     }
 
-    public static void setMineMode(MineMode mineMode){
-        switch (mineMode){
-            case explosive:
-                break;
-            case teleport:
-                break;
-            case slime:
-                break;
-            case flashbang:
-                break;
-        }
+    public void setMineMode(int mineMode){
+        MineMode = mineMode;
     }
 
     public double DistanceTo(Player player){
@@ -77,16 +65,15 @@ public class Mine extends Actor {
     public void Mine_Deactivate(){
         this.getColor().a = 0F;
         double explode_distance = 50;
-
         for (Player players: this.PlayerInRoom()){
-            if(this.MineMode == 0){
+            if(MineMode == 0){
                 if(this.DistanceTo(players) <= explode_distance){
                     float DistanceX = players.getX() + players.getWidth() / 2 - this.getX();
                     float DistanceY = players.getY() + players.getHeight() / 2 - this.getY();
-                    players.moveBy(500/DistanceX, 500/DistanceY);
+                    players.moveBy(5000/DistanceX, 5000/DistanceY);
                 }
             }
-            if(this.MineMode == 1){
+            if(MineMode == 1){
                 if(this.DistanceTo(players) <= explode_distance){
                     Random R_X = new Random();
                     Random R_Y = new Random();
@@ -95,7 +82,7 @@ public class Mine extends Actor {
                     players.setPosition(x1, y1);
                 }
             }
-            if(this.MineMode == 2){
+            if(MineMode == 2){
                 if(this.DistanceTo(players) <= explode_distance){
                     //players.MOVE_SPEED_CHANGE(-5);
                     //not created yet in player, fight
