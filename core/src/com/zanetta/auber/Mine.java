@@ -7,8 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import java.util.Random;
 
 public class Mine extends Actor {
+    private static int MineMode;
     //MineMode:1 = Explosive Mine, 2 = Teleport Mines, 3 = Slime Mine, 4 = Flashbang.
-    private int MineMode = 1;
 
     private final TextureRegion textureRegion;
 
@@ -50,12 +50,16 @@ public class Mine extends Actor {
     public static void setMineMode(MineMode mineMode){
         switch (mineMode){
             case explosive:
+                MineMode = 0;
                 break;
             case teleport:
+                MineMode = 1;
                 break;
             case slime:
+                MineMode = 2;
                 break;
             case flashbang:
+                MineMode = 3;
                 break;
         }
     }
