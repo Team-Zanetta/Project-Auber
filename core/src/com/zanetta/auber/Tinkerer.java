@@ -88,11 +88,9 @@ public class Tinkerer extends Infiltrator{
         }
         wanderinglooptimecounter += deletaTime;
         if(wanderinglooptimecounter > duration){
-            addAction(Actions.delay(3.0F));
-            setMine(Mine.MineMode.explosive);
             wanderinglooptimecounter = 0;
         }
-        Gdx.app.log("wanderinglooptimecounter", String.valueOf(wanderinglooptimecounter));
+        //Gdx.app.log("wanderinglooptimecounter", String.valueOf(wanderinglooptimecounter));
     }
 
     public float getWanderinglooptimecounter(){
@@ -100,9 +98,4 @@ public class Tinkerer extends Infiltrator{
     }
 
 
-    public void setMine(Mine.MineMode mineMode){
-        Mine firstMine = new Mine(region);
-        firstMine.setPosition(getX(), getY());
-        Mine.setMineMode(mineMode);
-    }
 }

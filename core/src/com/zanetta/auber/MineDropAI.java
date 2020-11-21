@@ -2,10 +2,6 @@ package com.zanetta.auber;
 
 
 import com.badlogic.gdx.scenes.scene2d.Action;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.actions.DelayAction;
-import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
-import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 
 public class MineDropAI{
 

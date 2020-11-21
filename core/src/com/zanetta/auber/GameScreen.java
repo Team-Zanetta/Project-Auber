@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 
+import java.util.Random;
+
 public class GameScreen extends ScreenAdapter{
     private Texture mainTexture;
     private Texture tinkererTexture;
@@ -14,7 +16,8 @@ public class GameScreen extends ScreenAdapter{
     private Stage stage;
     private Player mainPlayer;
     private Tinkerer tinkerer;
-
+    private Random ran_minemode;
+    private int mine_mode;
 
     public GameScreen(){
         mainTexture = new Texture(Gdx.files.internal("badlogic.jpg"));
@@ -40,6 +43,10 @@ public class GameScreen extends ScreenAdapter{
         if(tinkerer.getWanderinglooptimecounter() == 0){
             Mine Mine1 = new Mine((new TextureRegion(mineTexture)));
             Mine1.setBounds(tinkerer.getX(), tinkerer.getY(), 100, 100);
+            ran_minemode = new Random();
+            mine_mode = ran_minemode.nextInt(4);
+            Mine1.setMineMode(mine_mode);
+            Gdx.app.log("mine_mode ", String.valueOf(mine_mode));
             stage.addActor(Mine1);
         }
 
