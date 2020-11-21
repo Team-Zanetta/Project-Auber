@@ -185,6 +185,16 @@ public class Player extends Actor implements Sprite, InputProcessor {
 			infiltratorCarrying=null;
 		}
 	}
+	
+	public boolean teleportTo(float x, float y) {
+		if(0 < x & 0 < y & x < getStage().getWidth() & y < getStage().getHeight()) {
+			setX(x);
+			setY(y);
+			return true;
+		}else {
+			return false;
+		}
+	}
 
 	@Override
 	public TextureRegion getTextureRegion() {
