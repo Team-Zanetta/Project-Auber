@@ -15,15 +15,9 @@ public class Tinkerer extends Infiltrator{
     }
 
     @Override
-    public void act(float delta) {
-        super.act(delta);
-    }
-
-
-    @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        if (region == null || !isVisible()){
+        if (textureRegion == null || !isVisible()){
             return;
         }
 
@@ -60,6 +54,7 @@ public class Tinkerer extends Infiltrator{
     float rn_y1;
     Random randonx;
     Random randony;
+    
     @Override
     public void act(float deletaTime){
         super.act(deletaTime);
