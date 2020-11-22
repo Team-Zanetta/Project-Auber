@@ -22,6 +22,9 @@ public class ProjectAuberGame extends ApplicationAdapter {
 		stage.addActor(player);
 		stage.addActor(infiltrator);
 		stage.addActor(tinkerer);
+		
+		Controller controller = new Controller();
+		stage.addActor(controller);
 	}
 
 	@Override

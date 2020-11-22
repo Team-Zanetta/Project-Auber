@@ -1,25 +1,77 @@
 package com.zanetta.auber;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.utils.Array;
 
-public class Controller {
+public class Controller extends Actor{
+	private boolean infiltratorWin = false;
+	private boolean initialised;
+	private int totalSystems;
+	private ArrayList<System> systems = new ArrayList<>();
+	private ArrayList<Infiltrator> infiltrators = new ArrayList<>();
+	private float timeBetweenSabotages = 10, decreaseFactor = 0.8f, timeToNextSabotage;
 	
 	
-	int total_systems = 15;
-	ArrayList<System> systems = new ArrayList<>();
+	public Controller() {
+		super();
+		initialised = false;
+		timeToNextSabotage = timeBetweenSabotages;
+	}
 	
-	public void Set_Systems(ArrayList systems) {
-		System o1 = new System(100, false);
-		for (int i = 0; i < total_systems; i ++) {
-			systems.add(-1, o1);
+	public void initialise() {
+		Array <Actor> actors = this.getStage().getActors();
+		for(Actor actor : actors){
+			if (actor instanceof System) {
+				systems.add((System)actor);
+			}else if (actor instanceof Infiltrator) {
+				infiltrators.add((Infiltrator)actor);
+			}
+		}
+		totalSystems = systems.size();
+		initialised = true;
+	}
+	
+	public void act(float delta) {
+		if(!initialised) {
+			initialise();
+		}
+		destroyedCheck();
+		if(systemsRemain() == 0) {
+			infiltratorWin = true;
+		}else {
+			timeToNextSabotage -= delta;
+			
+			if(timeToNextSabotage < 0) {
+				doASabotage();
+				if(systemsRemain() % 3 == 0) {
+					timeToNextSabotage *= decreaseFactor;
+				}
+				timeToNextSabotage = timeBetweenSabotages;
+			}
+		}
+	}
+	
+	private void doASabotage() {
+		Collections.shuffle(infiltrators);
+		boolean foundFreeInf = false;
+		int i = 0;
+		while(!foundFreeInf & i < infiltrators.size()) {
+			Infiltrator inf = infiltrators.get(i);
+			
+			if(inf.state() == Infiltrator.State.IDLE) {
+				foundFreeInf = true;
+				inf.PerformSabotage();
+			}
+			else {
+				i += 1;
+			}
 		}
 	}
 	 
-	 public void DestroyedCheck() {
+	 public void destroyedCheck() {
 		 for (int i = 0; i < systems.size(); i++) {
 			 if (systems.get(i).getHealth() == 0) {
 				 systems.get(i).setDestroyed(true);
@@ -27,7 +79,7 @@ public class Controller {
 		 }
 	 }
 	 
-	 public int SystemsRemain() {
+	 public int systemsRemain() {
 		 int output = 0;
 		 for (int i = 0; i < systems.size(); i++) {
 			 if (systems.get(i).getDestroyed() == false) {
@@ -36,5 +88,4 @@ public class Controller {
 		 }
 		return output;
 	 }
-	 
 }
