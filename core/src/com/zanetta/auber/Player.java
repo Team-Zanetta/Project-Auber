@@ -14,6 +14,7 @@ public class Player extends Actor implements Sprite, InputProcessor {
 	private TextureRegion textureRegion;
 	private float xVelocity, yVelocity;
 	private float movementSpeed = 30;
+	private float movementSpeedAdjust = 1, timeLeftOnSpeedAdjust = 0;
 	private float scannerSlowdown = 0.5f;
 	public boolean scanning;
 	private float scannerRadius = 100;
@@ -43,6 +44,10 @@ public class Player extends Actor implements Sprite, InputProcessor {
 			float distance = movementSpeed*duration;
 			if (scanning) {
 				distance = distance * scannerSlowdown;
+			}
+			if (timeLeftOnSpeedAdjust < 0) {
+				distance = distance * movementSpeedAdjust;
+				timeLeftOnSpeedAdjust -= delta;
 			}
 			
 			float velocity = (float) Math.sqrt(xVelocity * xVelocity + yVelocity * yVelocity);
@@ -184,6 +189,21 @@ public class Player extends Actor implements Sprite, InputProcessor {
 			infiltratorCarrying.setVisible(true);
 			infiltratorCarrying=null;
 		}
+	}
+	
+	public boolean teleportTo(float x, float y) {
+		if(0 < x & 0 < y & x < getStage().getWidth() & y < getStage().getHeight()) {
+			setX(x);
+			setY(y);
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public void changeSpeed(float speedFactor, float time) {
+		movementSpeedAdjust = speedFactor;
+		timeLeftOnSpeedAdjust = time;
 	}
 
 	@Override
