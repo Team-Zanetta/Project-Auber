@@ -1,5 +1,7 @@
 package com.zanetta.auber;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer.Random;
@@ -7,7 +9,9 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Queue;
+import com.badlogic.gdx.utils.Timer;
 
 public class Infiltrator extends Actor implements Sprite{
 	private TextureRegion textureRegion;
@@ -16,6 +20,7 @@ public class Infiltrator extends Actor implements Sprite{
 	public Health health;
 	private int maxHP = 3;
 	private float movementSpeed = 30;
+	private ArrayList<System> systems = new ArrayList<System>();
 
 	
 	enum State{
@@ -105,16 +110,43 @@ public class Infiltrator extends Actor implements Sprite{
 
         return state;
     }
+    
+    
+    public ArrayList<System> getAllSystems(){
+    	ArrayList<System> systems = new ArrayList<System>();
+    	Array <Actor> actors = this.getStage().getActors();
+		for(Actor actor : actors){
+			if (actor instanceof System) {
+				systems.add((System)actor);
+			}
+		}
+		return systems;
+    }
 
-
-    public Queue sabotageQueue(){
-
-        return null;
+    public Queue<System> sabotageQueue(){
+    	if(systems.size() == 0) {
+    		systems = getAllSystems();
+    	}
+    	
+    	Queue<System> system_queue = new Queue<>();
+    	for (int i = 0; i < systems.size(); i++) {
+    		if (systems.get(i).getDestroyed() == false) {
+				 system_queue.addLast(systems.get(i));
+			 }
+    	}
+        return system_queue;
     }
 
 
     public void PerformSabotage(){
-        
+        System sabotage = sabotageQueue().get(0);
+        moveTo(sabotage.getX(), sabotage.getY());
+        Timer timer = new Timer(); 
+        while (sabotage.getHealth() > 0) {
+        	timer.schedule(new TimerTask() {
+            	sabotage.getHealth() - 2;}
+            , 1000);
+        }
     }
 
 
