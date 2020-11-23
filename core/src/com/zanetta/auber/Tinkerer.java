@@ -7,21 +7,42 @@ import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.*;
 
 public class Tinkerer extends Infiltrator{
-    private TextureRegion textureRegion, Mineregion;
+    private TextureRegion Mineregion;
 
-    public Tinkerer(String textureName) {
-        super(textureName);
-        set_Tinkerer_state(Tinkerer_state.wandering);
+    public Tinkerer(TextureRegion region) {
+        super(region);
+        tinkerer_state = Tinkerer_state.wandering;
+        setSize(this.region.getRegionWidth(), this.region.getRegionHeight());
     }
+
+    public TextureRegion getRegion(){
+        return region;
+    }
+
+
+    public void setRegion(TextureRegion region){
+        this.region = region;
+        setSize(this.region.getRegionWidth(), this.region.getRegionHeight());
+    }
+
+
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
         super.draw(batch, parentAlpha);
-        if (textureRegion == null || !isVisible()){
+        if (region == null || !isVisible()){
             return;
         }
 
-        batch.draw(textureRegion,
+    /* batch.draw(
+				region,
+				x, y,
+				originX, originY,
+				width, height,
+				scaleX, scaleY,
+				rotation
+		);*/
+        batch.draw(region,
                 getX(), getY(),
                 getOriginX(), getOriginY(),
                 getWidth(), getHeight(),
@@ -48,26 +69,42 @@ public class Tinkerer extends Infiltrator{
                 break;
         }
     }
+    public MoveToAction ToNextRandom(Tinkerer tinkerer){
+        float rn_x1;
+        float rn_y1;
+        double distance;
+        Random randonx;
+        Random randony;
+        randonx = new Random();
+        randony = new Random();
+        float speed = 300;
+        float duration;
+        rn_x1 = randonx.nextInt(1900);
+        rn_y1 = randony.nextInt(1000);
+        distance = rn_x1 * rn_x1 + rn_y1 * rn_y1;
+        duration =  (float) (Math.sqrt(distance) / speed);
+        return Actions.moveTo(rn_x1,rn_y1, duration);
+    }
+
+    public void stop(){
+        for(Action Actiones: getActions()){
+            removeAction(Actiones);
+        }
+    }
+
 
     float wanderinglooptimecounter = 0;
-    float rn_x1;
-    float rn_y1;
-    Random randonx;
-    Random randony;
-    
+
     @Override
     public void act(float deletaTime){
         super.act(deletaTime);
-        float duration = 2.0f;
+
         if(tinkerer_state == Tinkerer_state.wandering && wanderinglooptimecounter == 0){
-            randonx = new Random();
-            randony = new Random();
-            rn_x1 = randonx.nextInt(1900);
-            rn_y1 = randony.nextInt(1000);
-            addAction(Actions.moveTo(rn_x1,rn_y1, duration));
+            addAction(ToNextRandom(this));
         }
+
         wanderinglooptimecounter += deletaTime;
-        if(wanderinglooptimecounter > duration){
+        if(wanderinglooptimecounter > 5.0f){
             wanderinglooptimecounter = 0;
         }
         //Gdx.app.log("wanderinglooptimecounter", String.valueOf(wanderinglooptimecounter));
