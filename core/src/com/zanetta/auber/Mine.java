@@ -48,21 +48,12 @@ public class Mine extends Actor {
         MineMode = mineMode;
     }
 
-    public void setRandonMineMode(){
-        Random ran_minemode;
-        ran_minemode = new Random();
-        setMineMode(ran_minemode.nextInt(4));
-    }
-
-
     public double DistanceTo(Player player){
-        //Can be replaced by method in scanner
         double DistanceX = player.getX() + player.getWidth() / 2 - this.getX();
         double DistanceY = player.getY() + player.getHeight() / 2 - this.getY();
         double distance = Math.pow(DistanceX, 2) + Math.pow(DistanceY,2);
         return Math.sqrt(distance);
     }
-    
 
     public Player[] PlayerInRoom(){
         //need a algorithm that return all Players in the room from Scanner
