@@ -21,11 +21,14 @@ public class Infiltrator extends Actor implements Sprite{
 	private int maxHP = 3;
 	private float movementSpeed = 30;
 	private ArrayList<System> systems = new ArrayList<System>();
+	private System sabotaging;
 
 	
 	enum State{
 		IDLE,
-		INCAPACITATED
+		INCAPACITATED,
+		TRAVELING,
+		SABOTAGING
 	}
 	private State state;
 
@@ -47,7 +50,19 @@ public class Infiltrator extends Actor implements Sprite{
         	health.setHealth(0);
         	state = State.INCAPACITATED;
         	this.clearActions();
-        } else {
+        	
+    	} else if (state == State.TRAVELING) {
+    		if(getX() == sabotaging.getX() & getY() == sabotaging.getY()) {
+    			state = State.SABOTAGING;
+    			this.clearActions();
+    		}
+    	} else if (state == State.SABOTAGING) {
+    		sabotaging.setHealth(sabotaging.getHealth() - delta);
+    		if(sabotaging.getDestroyed()) {
+    			sabotaging = null;
+    			state = State.IDLE;
+    		}
+    	} else if (state == State.IDLE){
         	if(Math.random()<0.01) {
         		moveTo((float)Math.random() * getStage().getWidth(), (float)Math.random() * getStage().getHeight());
         	}
@@ -130,7 +145,7 @@ public class Infiltrator extends Actor implements Sprite{
     	
     	Queue<System> system_queue = new Queue<>();
     	for (int i = 0; i < systems.size(); i++) {
-    		if (systems.get(i).getDestroyed() == false) {
+    		if (systems.get(i).getDestroyed() == false && systems.get(i).claimed == false) {
 				 system_queue.addLast(systems.get(i));
 			 }
     	}
@@ -140,13 +155,10 @@ public class Infiltrator extends Actor implements Sprite{
 
     public void PerformSabotage(){
         System sabotage = sabotageQueue().get(0);
+        sabotage.claimed = true;
         moveTo(sabotage.getX(), sabotage.getY());
-        Timer timer = new Timer(); 
-        while (sabotage.getHealth() > 0) {
-        	timer.schedule(new TimerTask() {
-            	sabotage.getHealth() - 2;}
-            , 1000);
-        }
+        this.sabotaging = sabotage;
+        state = State.TRAVELING;
     }
 
 

@@ -13,6 +13,7 @@ import com.zanetta.auber.Infiltrator.State;
 public class Player extends Actor implements Sprite, InputProcessor {
 	private TextureRegion textureRegion;
 	private float xVelocity, yVelocity;
+	public Health health;
 	private float movementSpeed = 30;
 	private float movementSpeedAdjust = 1, timeLeftOnSpeedAdjust = 0;
 	private float scannerSlowdown = 0.5f;
@@ -33,6 +34,11 @@ public class Player extends Actor implements Sprite, InputProcessor {
 		yVelocity = 0;
 //        Sets up input
 		Gdx.input.setInputProcessor(this);
+		
+//		Sets up health
+		this.health = new Health();
+		this.health.setMaxHealth(5);
+		this.health.setHealth(5);
 	}
 
 	@Override

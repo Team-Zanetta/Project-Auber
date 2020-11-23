@@ -12,7 +12,7 @@ public class Controller extends Actor{
 	private int totalSystems;
 	private ArrayList<System> systems = new ArrayList<>();
 	private ArrayList<Infiltrator> infiltrators = new ArrayList<>();
-	private float timeBetweenSabotages = 10, decreaseFactor = 0.8f, timeToNextSabotage;
+	private float timeBetweenSabotages = 5, decreaseFactor = 0.8f, timeToNextSabotage;
 	
 	
 	public Controller() {

@@ -4,16 +4,30 @@ size: 2048,2048
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-infiltrator
+System
   rotate: false
   xy: 2004, 2004
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-infiltratorScanned
+SystemDestroyed
+  rotate: false
+  xy: 2004, 1936
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+infiltrator
   rotate: false
   xy: 36, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+infiltratorScanned
+  rotate: false
+  xy: 2004, 1970
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
@@ -27,14 +41,14 @@ player
   index: -1
 tinkerer
   rotate: false
-  xy: 2004, 1970
+  xy: 70, 2
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
 tinkererScanned
   rotate: false
-  xy: 70, 2
+  xy: 104, 2
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
