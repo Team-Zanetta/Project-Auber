@@ -82,7 +82,7 @@ public class Controller extends Actor{
 	 public int systemsRemain() {
 		 int output = 0;
 		 for (int i = 0; i < systems.size(); i++) {
-			 if (systems.get(i).getDestroyed() == false) {
+			 if (systems.get(i).getDestroyed() == false & systems.get(i).claimed == false) {
 				 output += 1;
 			 }
 		 }
