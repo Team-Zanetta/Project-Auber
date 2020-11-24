@@ -23,7 +23,7 @@ public PlayScreen(ProjectAuberGame game) {
 	this.game=game;
 	texture = new Texture("badlogicpack.png");
 	gamecam = new OrthographicCamera();
-	gamePort = new FitViewport( ProjectAuberGame.V_WIDTH,ProjectAuberGame.V_HEIGHT,gamecam);
+//	gamePort = new FitViewport(ProjectAuberGame.V_WIDTH,ProjectAuberGame.V_HEIGHT,gamecam);
 }
 	@Override
 	public void show() {
@@ -33,12 +33,12 @@ public PlayScreen(ProjectAuberGame game) {
 
 	@Override
 	public void render(float delta) {
-		 Gdx.gl.glClearColor(1, 0, 0, 1);
-		 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		 game.batch.setProjectionMatrix(gamecam.combined);
-		 game.batch.begin();
-		 game.batch.draw(texture, 0, 0);
-		 game.batch.end();
+//		 Gdx.gl.glClearColor(1, 0, 0, 1);
+//		 Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+//		 game.batch.setProjectionMatrix(gamecam.combined);
+//		 game.batch.begin();
+//		 game.batch.draw(texture, 0, 0);
+//		 game.batch.end();
 		
 	}
 
