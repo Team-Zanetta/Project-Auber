@@ -69,30 +69,44 @@ public class Tinkerer extends Infiltrator{
                 break;
         }
     }
+    public MoveToAction ToNextRandom(Tinkerer tinkerer){
+        float rn_x1;
+        float rn_y1;
+        double distance;
+        Random randonx;
+        Random randony;
+        randonx = new Random();
+        randony = new Random();
+        float speed = 300;
+        float duration;
+        rn_x1 = randonx.nextInt(1900);
+        rn_y1 = randony.nextInt(1000);
+        distance = rn_x1 * rn_x1 + rn_y1 * rn_y1;
+        duration =  (float) (Math.sqrt(distance) / speed);
+        return Actions.moveTo(rn_x1,rn_y1, duration);
+    }
+
+    public void stop(){
+        for(Action Actiones: getActions()){
+            removeAction(Actiones);
+        }
+    }
+
 
     float wanderinglooptimecounter = 0;
-    float rn_x1;
-    float rn_y1;
-    Random randonx;
-    Random randony;
+
     @Override
     public void act(float deletaTime){
         super.act(deletaTime);
-        float duration = 2.0f;
+
         if(tinkerer_state == Tinkerer_state.wandering && wanderinglooptimecounter == 0){
-            randonx = new Random();
-            randony = new Random();
-            rn_x1 = randonx.nextInt(1900);
-            rn_y1 = randony.nextInt(1000);
-            addAction(Actions.moveTo(rn_x1,rn_y1, duration));
+            addAction(ToNextRandom(this));
         }
         wanderinglooptimecounter += deletaTime;
-        if(wanderinglooptimecounter > duration){
-            addAction(Actions.delay(3.0F));
-            setMine(Mine.MineMode.explosive);
+        if(wanderinglooptimecounter > 2.0f){
             wanderinglooptimecounter = 0;
         }
-        Gdx.app.log("wanderinglooptimecounter", String.valueOf(wanderinglooptimecounter));
+        //Gdx.app.log("wanderinglooptimecounter", String.valueOf(wanderinglooptimecounter));
     }
 
     public float getWanderinglooptimecounter(){
@@ -100,9 +114,4 @@ public class Tinkerer extends Infiltrator{
     }
 
 
-    public void setMine(Mine.MineMode mineMode){
-        Mine firstMine = new Mine(region);
-        firstMine.setPosition(getX(), getY());
-        Mine.setMineMode(mineMode);
-    }
 }
