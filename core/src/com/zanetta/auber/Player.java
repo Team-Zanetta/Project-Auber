@@ -95,8 +95,8 @@ public class Player extends Actor implements Sprite, InputProcessor {
 				collisionX = collisionLayer.getCell((int) (getX() / tileWidth), (int) (getY() / tileHeight))
 						.getTile().getProperties().containsKey("blocked");
 
-				
-			} else if (xVelocity > 0) {
+			} 
+				if (xVelocity > 0) {
 				//top right tile
 				collisionX = collisionLayer.getCell((int) ((getX() + getWidth()) / tileWidth), (int) ((getY() + getHeight()) / tileHeight))
 						.getTile().getProperties().containsKey("blocked");
@@ -112,8 +112,9 @@ public class Player extends Actor implements Sprite, InputProcessor {
 					.getTile().getProperties().containsKey("blocked");
 			}
 			
-			//collision on y axis
-			if(yVelocity < 0) {
+				//collision on y axis
+				
+				if(yVelocity < 0) {
 				//bottom left tile
 				collisionY = collisionLayer.getCell((int) (getX() / tileWidth), (int) (getY() / tileHeight))
 						.getTile().getProperties().containsKey("blocked");
@@ -127,7 +128,9 @@ public class Player extends Actor implements Sprite, InputProcessor {
 				if(!collisionY)
 					collisionY = collisionLayer.getCell((int) ((getX() + getWidth()) / tileWidth), (int) (getY() / tileHeight))
 					.getTile().getProperties().containsKey("blocked");
-			} else if (yVelocity > 0) {
+				
+			} 
+				if (yVelocity > 0) {
 				//top left tile
 				collisionY = collisionLayer.getCell((int) (getX() / tileWidth), (int) ((getY() + getHeight()) / tileHeight))
 						.getTile().getProperties().containsKey("blocked");
@@ -139,7 +142,7 @@ public class Player extends Actor implements Sprite, InputProcessor {
 				
 				//top right tile
 				if(!collisionY)
-					collisionX = collisionLayer.getCell((int) ((getX() + getWidth()) / tileWidth), (int) ((getY() + getHeight()) / tileHeight))
+					collisionY = collisionLayer.getCell((int) ((getX() + getWidth()) / tileWidth), (int) ((getY() + getHeight()) / tileHeight))
 					.getTile().getProperties().containsKey("blocked");
 			}
 			
@@ -147,10 +150,12 @@ public class Player extends Actor implements Sprite, InputProcessor {
 			if(collisionX) {
 				setX(oldX);
 				xVelocity = 0;
+				collisionX = false;
 			}
 			if(collisionY) {
 				setY(oldY);
 				yVelocity = 0;
+				collisionY = false;
 			}
 			
 			this.addAction(moveAction);
@@ -351,13 +356,13 @@ public class Player extends Actor implements Sprite, InputProcessor {
 		
 //		Reduces the relative velocities on button up
 		if(keycode == Keys.RIGHT | keycode == Keys.D) {
-			xVelocity += -1;
+			xVelocity = 0;
 		}if(keycode == Keys.LEFT | keycode == Keys.A) {
-			xVelocity -= -1;
+			xVelocity = 0;
 		}if(keycode == Keys.UP | keycode == Keys.W) {
-			yVelocity += -1;
+			yVelocity  = 0;
 		}if(keycode == Keys.DOWN | keycode == Keys.S) {
-			yVelocity -= -1;
+			yVelocity  = 0;
 		}
 			
 		return true;

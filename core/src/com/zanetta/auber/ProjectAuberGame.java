@@ -1,5 +1,7 @@
 package com.zanetta.auber;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -19,6 +21,8 @@ public class ProjectAuberGame extends ApplicationAdapter {
 	private Tinkerer tinkerer;
 	private OrthogonalTiledMapRenderer renderer;
 	private TiledMap map;
+	private ArrayList<System> sysList = new ArrayList<System>();
+	
 	@Override
 	public void create () {
 		
@@ -38,13 +42,9 @@ public class ProjectAuberGame extends ApplicationAdapter {
 		Player player = new Player(Textures.getTexture("player"), (TiledMapTileLayer) map.getLayers().get(0));
 		
 //		Set Position of Player
-		player.setPosition(200, 90);
-		Infiltrator infiltrator = new Infiltrator("infiltrator");
-		mineTexture = new Texture(Gdx.files.internal("badlogic.jpg"));
-		tinkerer = new Tinkerer("tinkerer");
-		stage.addActor(player);
-		stage.addActor(infiltrator);
-		stage.addActor(tinkerer);
+		player.setPosition(85,85);
+
+
 		
 		System s1 = new System("System", 3);
 		s1.setX(100);
@@ -55,6 +55,16 @@ public class ProjectAuberGame extends ApplicationAdapter {
 		s2.setX(200);
 		s2.setY(200);
 		stage.addActor(s2);
+		
+		sysList.add(s1);
+		sysList.add(s2);
+
+		Infiltrator infiltrator = new Infiltrator("infiltrator", sysList);
+		mineTexture = new Texture(Gdx.files.internal("badlogic.jpg"));
+		tinkerer = new Tinkerer("tinkerer", sysList);
+		stage.addActor(player);
+		stage.addActor(infiltrator);
+		stage.addActor(tinkerer);
 		
 		Controller controller = new Controller();
 		stage.addActor(controller);

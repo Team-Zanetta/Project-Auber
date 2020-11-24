@@ -22,6 +22,7 @@ public class Infiltrator extends Actor implements Sprite{
 	private float movementSpeed = 30;
 	private ArrayList<System> systems = new ArrayList<System>();
 	private System sabotaging;
+	private ArrayList<System> sysList;
 	
 	enum State{
 		IDLE,
@@ -31,9 +32,10 @@ public class Infiltrator extends Actor implements Sprite{
 	}
 	private State state;
 
-    public  Infiltrator(String textureName){
+    public  Infiltrator(String textureName, ArrayList<System> sysList){
         super();
         this.textureName = textureName;
+        this.sysList = sysList;
         setTextureRegion(Textures.getTexture(textureName));
         setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
         hasBeenScanned = false;
@@ -152,8 +154,14 @@ public class Infiltrator extends Actor implements Sprite{
     }
 
 
-    public void PerformSabotage(){
-        System sabotage = sabotageQueue().get(0);
+    public void PerformSabotage(){	
+    	System sabotage = sysList.get(0);
+        for(System currentSystem: sysList) {
+        	if(currentSystem.claimed == false)
+        	{
+        		sabotage = currentSystem;
+        	}
+        }
         sabotage.claimed = true;
         moveTo(sabotage.getX(), sabotage.getY());
         this.sabotaging = sabotage;
