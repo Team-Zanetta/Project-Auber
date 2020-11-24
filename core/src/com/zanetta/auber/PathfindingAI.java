@@ -3,7 +3,7 @@ package com.zanetta.auber;
 public class Node {
 	public int i, j;
 	public int heuristic_cost;
-	public int final_cost;
+	public int finalCost;
 	public boolean solution;
 	
 	public Node(int i, int j) {
@@ -28,7 +28,7 @@ public class PathFinding {
 		grid = new Node[width][height];
 		closedNodes = new boolean[width][height];
 		openNodes = PriorityQueue<Node>((Node n1, Node n2) -> {
-			return n1.final_cost < n2.final_cost ? -1 : n1.final_cost > n2.final_cost ? 1 : 0;
+			return n1.finalCost < n2.finalCost ? -1 : n1.finalCost > n2.finalCost ? 1 : 0;
 		});
 		
 		startNode(si, sj);
@@ -42,7 +42,7 @@ public class PathFinding {
 			}
 		}
 		
-		grid[startI][startJ].final_cost = 0;
+		grid[startI][startJ].finalCost = 0;
 		
 		for (i = 0; i < blocks.length; i++) {
 			addBlockOnNode(blocks[i][0], blocks[i][1]);
@@ -50,20 +50,167 @@ public class PathFinding {
 		
 	}	
 		
-		public void addBlockOnNode(int i, int j) {
-			grid[i][j] = null;
-		}
-		
-		public void startNode(int i, intj) {
-			startI = i;
-			startJ = j;
-		}
-		
-		public void endNode(int i, int j) {
-			endI = i;
-			endJ = j;
-		}
+	public void addBlockOnNode(int i, int j) {
+		grid[i][j] = null;
+	}
 	
+	public void startNode(int i, intj) {
+		startI = i;
+		startJ = j;
+	}
+	
+	public void endNode(int i, int j) {
+		endI = i;
+		endJ = j;
+	}
+
+	public void updateCostIfNeeded(Node current, Node t, int cost) {
+		if (t == null || closedNodes[t.i][t.j])
+			return;
+		
+		int tFinalCost = t.heuristic_cost + cost;
+		boolean isOpen = openNodes.contains(t);
+		
+		if (!isOpen || tFinalCost < t.FinalCost) {
+			t.finalCost = tFinalCost;
+			t.parent = current;
+			
+			if (!isOpen)
+				openNodes.add(t);
+		}
+	}
+	
+	public void process() {
+		openNodes.add(grid[startI][startJ]);
+		Node current;
+		
+		while (true) {
+			current = openNodes.poll();
+			
+			if (current == null)
+				break;
+			
+			closedNodes[current.i][current.j]= true;
+			
+			if (current.equals(grid[endI][endJ]))
+				return;
+			
+			Node t;
+			
+			if (current.i - 1 >= 0) {
+				t = grid[current.i - 1][current.j];
+				updateCostIfNeeded(current, t, current.finalCost + V_H_COST);
+				
+				if (current.j - 1 >= 0) {
+					t = grid[current.i - 1][current.j - 1];
+					updateCostIfNeeded(current, t, current.finalCost + DIAGONAL_COST);
+				}
+				
+				if (current.j + 1 < grid[0].length) {
+					t = grid[current.i - 1][current.j + 1];
+					updateCostIfNeeded(current, t, current.finalCost + DIAGONAL_COST);
+				}
+			}
+			
+			if (current.j - 1 >= 0) {
+				t = grid[current.i][current.j - 1];
+				updateCostIfNeeded(current, t, current.finalCost + V_H_COST);
+			}
+			
+			if (current.j + 1 < grid[0].length) {
+				t = grid[current.i][current.j + 1];
+				updateCostIfNeeded(current, t, current.finalCost + V_H_COST);
+			}
+			
+			if (current.i + 1 < grid.length) {
+				t = grid[current.i + 1][current.j];
+				updateCostIfNeeded(current, t, current.finalCost + V_H_COST);
+				
+				if (current.j - 1 >= 0) {
+					t = grid[current.i + 1][current.j - 1];
+					updateCostIfNeeded(current, t, current.finalCost + DIAGONAL_COST);
+				}
+				
+				if (current.j + 1 < grid[0].length) {
+					t = grid[current.i + 1][current.j + 1];
+					updateCostIfNeeded(current, t, current.finalCost + DIAGONAL_COST);
+				}
+			}
+		}
+	}
+	
+	public void display() {
+		System.out.println("Grid : ");
+		
+		for (int i; i < grid.length; i++) {
+			for (int j; j < grid[i].length; j++) {
+				if (i == startI && j == startJ)
+					System.out.print("SO ");
+				else if (i == endI && j == endJ)
+					System.out.print("DE ");
+				else if (grid[i][j] != null)
+					System.out.printf("%-3d " , 0);
+				else
+					System.out.print("BL ");
+			}
+			
+			System.out.println();
+		}
+		
+		System.out.println();
+	}
+	
+	public void displayScores() {
+		System.out.println("\nScores for nodes :");
+		
+		for (int i; i < grid.length; i++) {
+			for (int j; j < grid[i].length; j++) {
+				if (grid[i][j] != null)
+					System.out.printf("%-3d " , grid[i][j].finalCost);
+				else
+					System.out.print("BL ");
+			}
+			
+			System.out.println();
+		}
+		
+		System.out.println();
+	}
+	
+	public void displaySolution() {
+		if (closedNodes[endI][endJ]) {
+			System.out.print("Path :");
+			Node current = grid[endI][endJ];
+			System.out.print(current);
+			grid[current.i][current.j].solution = true;
+			
+			while (current.parent != null) {
+				System.out.println(" -> " + current.parent);
+				grid[current.parent.i][current.parent.j].solution = true;
+				current = current.parent;
+			}
+			
+			System.out.println("\n");
+			
+			for (int i; i < grid.length; i++) {
+				for (int j; j < grid[i].length; j++) {
+					if (i == startI && j == startJ)
+						System.out.print("SO ");
+					else if (i == endI && j == endJ)
+						System.out.print("DE ");
+					else if (grid[i][j] != null)
+						System.out.printf("%-3s " , grid[i][j].solution ? "X" : "0");
+					else
+						System.out.print("BL ");
+				}
+				
+				System.out.println();
+			}
+			
+			System.out.println();
+		} else
+			System.out.println("No possible path");
+	}
+		
 	
 }
-
