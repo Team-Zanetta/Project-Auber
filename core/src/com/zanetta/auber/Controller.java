@@ -9,7 +9,6 @@ import com.badlogic.gdx.utils.Array;
 public class Controller extends Actor{
 	private boolean infiltratorWin = false;
 	private boolean initialised;
-	private int totalSystems;
 	private ArrayList<System> systems = new ArrayList<>();
 	private ArrayList<Infiltrator> infiltrators = new ArrayList<>();
 	private float timeBetweenSabotages = 5, decreaseFactor = 0.8f, timeToNextSabotage;
@@ -30,7 +29,6 @@ public class Controller extends Actor{
 				infiltrators.add((Infiltrator)actor);
 			}
 		}
-		totalSystems = systems.size();
 		initialised = true;
 	}
 	
@@ -61,7 +59,7 @@ public class Controller extends Actor{
 		while(!foundFreeInf & i < infiltrators.size()) {
 			Infiltrator inf = infiltrators.get(i);
 			
-			if(inf.state() == Infiltrator.State.IDLE) {
+			if(inf.state == Infiltrator.State.IDLE) {
 				foundFreeInf = true;
 				inf.PerformSabotage();
 			}
@@ -87,5 +85,9 @@ public class Controller extends Actor{
 			 }
 		 }
 		return output;
+	 }
+	 
+	 public boolean infiltratorWin() {
+		 return infiltratorWin;
 	 }
 }

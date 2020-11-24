@@ -142,11 +142,6 @@ public class Player extends Actor implements Sprite, InputProcessor {
 		return infiltratorCarrying;
 	}
 
-	public Enum state() {
-
-		return null;
-	}
-
 	private Infiltrator getNearestinfiltrator() {
 		float[] playerLocation = getCentrePoint();
 		Array<Actor> actors = this.getStage().getActors();
@@ -185,7 +180,7 @@ public class Player extends Actor implements Sprite, InputProcessor {
 		if (infiltratorCarrying == null) {
 			float[] playerLocation = getCentrePoint();
 			Infiltrator infiltrator = getNearestinfiltrator();
-			if (infiltrator.state() == State.INCAPACITATED) {
+			if (infiltrator.state == State.INCAPACITATED) {
 				
 				float[] infiltratorLocation = infiltrator.getCentrePoint();
 				float dx = Math.abs(playerLocation[0] - infiltratorLocation[0]);

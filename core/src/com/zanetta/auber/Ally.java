@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
-import com.zanetta.auber.Infiltrator.State;
 
 public class Ally extends Actor implements Sprite{
 	private TextureRegion textureRegion;

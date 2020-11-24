@@ -4,14 +4,10 @@ import java.util.ArrayList;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.badlogic.gdx.graphics.g3d.particles.influencers.ColorInfluencer.Random;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveToAction;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Queue;
-import com.badlogic.gdx.utils.Timer;
 
 public class Infiltrator extends Actor implements Sprite{
 	private TextureRegion textureRegion;
@@ -29,7 +25,7 @@ public class Infiltrator extends Actor implements Sprite{
 		TRAVELING,
 		SABOTAGING
 	}
-	private State state;
+	public State state;
 
     public  Infiltrator(String textureName){
         super();
@@ -70,7 +66,7 @@ public class Infiltrator extends Actor implements Sprite{
     }
     
     public void moveTo(float x, float y) {
-    	if(state != state.INCAPACITATED) {
+    	if(state != State.INCAPACITATED) {
 	    	MoveToAction moveAction = new MoveToAction();
 	    	moveAction.setPosition(x, y);
 	    	
@@ -118,13 +114,6 @@ public class Infiltrator extends Actor implements Sprite{
     public boolean getHasBeenScanned() {
     	return hasBeenScanned;
     }
-
-
-    public Enum state(){
-
-        return state;
-    }
-    
     
     public ArrayList<System> getAllSystems(){
     	ArrayList<System> systems = new ArrayList<System>();
