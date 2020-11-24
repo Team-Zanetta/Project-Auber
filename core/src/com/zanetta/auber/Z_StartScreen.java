@@ -18,7 +18,7 @@ public class Z_StartScreen implements Screen{
     public Z_StartScreen(Z_Launcher launcher){
         this.launcher = launcher;
         stage = new Stage();
-        logoActor = new Player(Textures.getTexture("zanetta"));
+//        logoActor = new Player(Textures.getTexture("zanetta"));
         logoActor.setWidth(logoActor.getWidth()/10);
         logoActor.setHeight(logoActor.getHeight()/10);
         logoActor.setPosition(stage.getWidth()/2 - logoActor.getWidth()/2, stage.getHeight()/2 - logoActor.getHeight()/2);
