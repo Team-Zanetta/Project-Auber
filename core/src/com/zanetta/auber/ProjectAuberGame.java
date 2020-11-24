@@ -6,6 +6,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class ProjectAuberGame extends ApplicationAdapter {
@@ -13,9 +17,21 @@ public class ProjectAuberGame extends ApplicationAdapter {
 	Stage stage;
 	private Texture mineTexture;
 	private Tinkerer tinkerer;
+	private OrthogonalTiledMapRenderer renderer;
+	private TiledMap map;
 	@Override
 	public void create () {
-		camera = new OrthographicCamera(1280, 720);
+		
+		TmxMapLoader tmxMapLoader = new TmxMapLoader();
+		map = tmxMapLoader.load("maps/AuberSpaceStation.tmx");
+		TiledMapTileLayer layer = (TiledMapTileLayer) map.getLayers().get(0);
+		renderer = new OrthogonalTiledMapRenderer(map);
+	
+        camera = new OrthographicCamera();
+        float widthHeightRatio= 1f; 
+        camera.setToOrtho(false,(layer.getWidth()*layer.getTileWidth())/widthHeightRatio,layer.getHeight()*layer.getTileHeight());
+        camera.update();
+
 		Textures.importTextures("auberTextures.atlas");
 		
 		stage = new Stage();
@@ -46,6 +62,10 @@ public class ProjectAuberGame extends ApplicationAdapter {
 	public void render () {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		
+		camera.update();
+		renderer.setView(camera);
+		renderer.render();
 		
 		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
