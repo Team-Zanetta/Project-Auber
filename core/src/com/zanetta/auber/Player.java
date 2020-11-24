@@ -3,8 +3,10 @@ package com.zanetta.auber;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 import com.badlogic.gdx.utils.Array;
@@ -12,6 +14,7 @@ import com.zanetta.auber.Infiltrator.State;
 
 public class Player extends Actor implements Sprite, InputProcessor {
 	private TextureRegion textureRegion;
+	private ShapeRenderer shapeRenderer;
 	private float xVelocity, yVelocity;
 	public Health health;
 	private float movementSpeed = 30;
@@ -23,10 +26,11 @@ public class Player extends Actor implements Sprite, InputProcessor {
 	private Infiltrator infiltratorCarrying;
 	private float attackRange = 50;
 	private int attackDamage = 1;
-
-	public Player(TextureRegion textureRegion) {
+	
+	public Player(TextureRegion textureRegion, ShapeRenderer sr) {
 		super();
 //        Sets up textures
+		this.shapeRenderer = sr;
 		this.textureRegion = textureRegion;
 		setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
 //        Sets up default velocities
@@ -89,9 +93,11 @@ public class Player extends Actor implements Sprite, InputProcessor {
 //    				Slower circle check
 					if (Math.sqrt(dx * dx + dy * dy) < scannerRadius) {
 						infiltrator.scan();
+					}else {
+//				    	If the infiltrator is not within the radius, they are unscanned (texture returns to normal)
+						infiltrator.unScan();
 					}
 				}else {
-//			    	If the infiltrator is not within the radius, they are unscanned (texture returns to normal)
 					infiltrator.unScan();
 				}
 			}
@@ -120,6 +126,12 @@ public class Player extends Actor implements Sprite, InputProcessor {
 		super.draw(batch, parentAlpha);
 		if (textureRegion == null | !isVisible()) {
 			return;
+		}
+		
+		if(scanning) {
+			shapeRenderer.setAutoShapeType(true);
+			shapeRenderer.setColor(Color.BLUE);
+			shapeRenderer.circle(getCentrePoint()[0], getCentrePoint()[1], scannerRadius);
 		}
 
 		batch.draw(textureRegion, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(),

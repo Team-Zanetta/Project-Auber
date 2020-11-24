@@ -4,19 +4,22 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 public class ProjectAuberGame extends ApplicationAdapter {
 	OrthographicCamera camera;
 	Stage stage;
+	ShapeRenderer sr;
 	
 	@Override
 	public void create () {
 		camera = new OrthographicCamera(1280, 720);
 		Textures.importTextures("auberTextures.atlas");
 		
+		sr = new ShapeRenderer();
 		stage = new Stage();
-		Player player = new Player(Textures.getTexture("player"));
+		Player player = new Player(Textures.getTexture("player"), sr);
 		Infiltrator infiltrator = new Infiltrator("infiltrator");
 		Tinkerer tinkerer = new Tinkerer("tinkerer");
 		stage.addActor(player);
@@ -42,8 +45,11 @@ public class ProjectAuberGame extends ApplicationAdapter {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
+		sr.setAutoShapeType(true);
+		sr.begin();
 		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
+		sr.end();
 	}
 	
 	@Override
