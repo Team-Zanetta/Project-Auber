@@ -11,7 +11,6 @@ import javax.swing.plaf.synth.Region;
 
 public class Tinkerer extends Infiltrator{
     private TextureRegion Mineregion;
-    private Region tinkererregin;
 
     public Tinkerer(String string) {
         super(string);
