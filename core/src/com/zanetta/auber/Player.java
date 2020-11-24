@@ -153,8 +153,10 @@ public class Player extends Actor implements Sprite, InputProcessor {
 				yVelocity = 0;
 			}
 			
+			this.addAction(moveAction);
 			
 		}
+		
 
 		if (scanning) {
 			scan();
