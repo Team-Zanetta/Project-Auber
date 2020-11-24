@@ -28,6 +28,11 @@ public class ProjectAuberGame extends ApplicationAdapter {
 		s1.setY(100);
 		stage.addActor(s1);
 		
+		System s2 = new System("System", 3);
+		s2.setX(200);
+		s2.setY(200);
+		stage.addActor(s2);
+		
 		Controller controller = new Controller();
 		stage.addActor(controller);
 	}

@@ -22,7 +22,6 @@ public class Infiltrator extends Actor implements Sprite{
 	private float movementSpeed = 30;
 	private ArrayList<System> systems = new ArrayList<System>();
 	private System sabotaging;
-
 	
 	enum State{
 		IDLE,
