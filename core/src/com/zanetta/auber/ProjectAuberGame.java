@@ -24,22 +24,33 @@ public class ProjectAuberGame extends ApplicationAdapter {
 		sr = new ShapeRenderer();
 		stage = new Stage();
 		Player player = new Player(Textures.getTexture("player"), sr);
-		Infiltrator infiltrator = new Infiltrator("infiltrator");
 		mineTexture = new Texture(Gdx.files.internal("badlogic.jpg"));
 		tinkerer = new Tinkerer("tinkerer");
 		stage.addActor(player);
-		stage.addActor(infiltrator);
 		stage.addActor(tinkerer);
 		
-		System s1 = new System("System", 3);
-		s1.setX(100);
-		s1.setY(100);
-		stage.addActor(s1);
 		
-		System s2 = new System("System", 3);
-		s2.setX(200);
-		s2.setY(200);
-		stage.addActor(s2);
+		
+		for (int i = 0; i < 15; i++) {
+			Ally ally = new Ally(Textures.getTexture("infiltrator"));
+			ally.setX((float)(Math.random() * stage.getWidth()));
+			ally.setY((float)(Math.random() * stage.getHeight()));
+			stage.addActor(ally);
+		}
+		
+		for (int i = 0; i < 5; i++) {
+			Infiltrator infiltrator = new Infiltrator("infiltrator");
+			infiltrator.setX((float)(Math.random() * stage.getWidth()));
+			infiltrator.setY((float)(Math.random() * stage.getHeight()));
+			stage.addActor(infiltrator);
+		}
+		
+		for (int i = 0; i < 10; i++) {
+			System s1 = new System("System", 3);
+			s1.setX((float)(Math.random() * stage.getWidth()));
+			s1.setY((float)(Math.random() * stage.getHeight()));
+			stage.addActor(s1);
+		}
 		
 		Controller controller = new Controller();
 		stage.addActor(controller);
