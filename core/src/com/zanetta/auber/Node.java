@@ -5,6 +5,7 @@ public class Node {
 	public int heuristic_cost;
 	public int finalCost;
 	public boolean solution;
+	public Node parent;
 	
 	public Node(int i, int j) {
 		this.i = i;
