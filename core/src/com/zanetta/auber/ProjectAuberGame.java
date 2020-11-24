@@ -35,7 +35,10 @@ public class ProjectAuberGame extends ApplicationAdapter {
 		Textures.importTextures("auberTextures.atlas");
 		
 		stage = new Stage();
-		Player player = new Player(Textures.getTexture("player"));
+		Player player = new Player(Textures.getTexture("player"), (TiledMapTileLayer) map.getLayers().get(0));
+		
+//		Set Position of Player
+		player.setPosition(200, 90);
 		Infiltrator infiltrator = new Infiltrator("infiltrator");
 		mineTexture = new Texture(Gdx.files.internal("badlogic.jpg"));
 		tinkerer = new Tinkerer("tinkerer");

@@ -1,10 +1,12 @@
 package com.zanetta.auber;
 
 import com.badlogic.gdx.Gdx;
+
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.actions.MoveByAction;
 import com.badlogic.gdx.utils.Array;
@@ -12,6 +14,7 @@ import com.zanetta.auber.Infiltrator.State;
 
 public class Player extends Actor implements Sprite, InputProcessor {
 	private TextureRegion textureRegion;
+	private TiledMapTileLayer collisionLayer;
 	private float xVelocity, yVelocity;
 	public Health health;
 	private float movementSpeed = 30;
@@ -24,7 +27,7 @@ public class Player extends Actor implements Sprite, InputProcessor {
 	private float attackRange = 50;
 	private int attackDamage = 1;
 
-	public Player(TextureRegion textureRegion) {
+	public Player(TextureRegion textureRegion, TiledMapTileLayer collisionLayer) {
 		super();
 //        Sets up textures
 		this.textureRegion = textureRegion;
@@ -39,6 +42,9 @@ public class Player extends Actor implements Sprite, InputProcessor {
 		this.health = new Health();
 		this.health.setMaxHealth(5);
 		this.health.setHealth(5);
+
+//		Sets up Collision layer
+		this.collisionLayer = collisionLayer;
 	}
 
 	@Override
@@ -63,6 +69,91 @@ public class Player extends Actor implements Sprite, InputProcessor {
 			moveAction.setDuration(duration);
 			
 			this.addAction(moveAction);
+			
+			/**
+			 *	Below is the code for collisions regarding player and walls. 
+			 */
+			
+			//variables for collision
+			float oldX = getX(), oldY = getY(), tileWidth = collisionLayer.getTileWidth(), tileHeight = collisionLayer.getTileHeight();
+			boolean collisionX = false, collisionY = false;
+			
+			//collision on x-axis
+			if(xVelocity < 0) {
+				//top left tile
+				collisionX = collisionLayer.getCell((int) (getX() / tileWidth), (int) ((getY() + getHeight())/ tileHeight))
+						.getTile().getProperties().containsKey("blocked");
+				
+				//middle left tile
+				if(!collisionX)
+				collisionX = collisionLayer.getCell((int) (getX() / tileWidth), (int) ((getY() + getHeight() / 2)/ tileHeight))
+						.getTile().getProperties().containsKey("blocked");
+
+				
+				//bottom left tile
+				if(!collisionX)
+				collisionX = collisionLayer.getCell((int) (getX() / tileWidth), (int) (getY() / tileHeight))
+						.getTile().getProperties().containsKey("blocked");
+
+				
+			} else if (xVelocity > 0) {
+				//top right tile
+				collisionX = collisionLayer.getCell((int) ((getX() + getWidth()) / tileWidth), (int) ((getY() + getHeight()) / tileHeight))
+						.getTile().getProperties().containsKey("blocked");
+				
+				//middle right tile
+				if(!collisionX)
+				collisionX = collisionLayer.getCell((int) ((getX() + getWidth()) / tileWidth), (int) ((getY() + getHeight() / 2) / tileHeight))
+						.getTile().getProperties().containsKey("blocked");
+				
+				//bottom right tile
+				if(!collisionX)
+				collisionX = collisionLayer.getCell((int) ((getX() + getWidth()) / tileWidth), (int) (getY() / tileHeight))
+					.getTile().getProperties().containsKey("blocked");
+			}
+			
+			//collision on y axis
+			if(yVelocity < 0) {
+				//bottom left tile
+				collisionY = collisionLayer.getCell((int) (getX() / tileWidth), (int) (getY() / tileHeight))
+						.getTile().getProperties().containsKey("blocked");
+				
+				//bottom middle tile
+				if(!collisionY)
+					collisionY = collisionLayer.getCell((int) ((getX() + getWidth() / 2) / tileWidth), (int) ((getY() + getHeight()) / tileHeight))
+					.getTile().getProperties().containsKey("blocked");
+				
+				//bottom right tile
+				if(!collisionY)
+					collisionY = collisionLayer.getCell((int) ((getX() + getWidth()) / tileWidth), (int) (getY() / tileHeight))
+					.getTile().getProperties().containsKey("blocked");
+			} else if (yVelocity > 0) {
+				//top left tile
+				collisionY = collisionLayer.getCell((int) (getX() / tileWidth), (int) ((getY() + getHeight()) / tileHeight))
+						.getTile().getProperties().containsKey("blocked");
+				
+				//top middle tile
+				if(!collisionY)
+					collisionY = collisionLayer.getCell((int) ((getX() + getWidth() / 2) / tileWidth), (int) ((getY() + getHeight()/ 2) / tileHeight))
+					.getTile().getProperties().containsKey("blocked");
+				
+				//top right tile
+				if(!collisionY)
+					collisionX = collisionLayer.getCell((int) ((getX() + getWidth()) / tileWidth), (int) ((getY() + getHeight()) / tileHeight))
+					.getTile().getProperties().containsKey("blocked");
+			}
+			
+			//react to collision on x & y axis
+			if(collisionX) {
+				setX(oldX);
+				xVelocity = 0;
+			}
+			if(collisionY) {
+				setY(oldY);
+				yVelocity = 0;
+			}
+			
+			
 		}
 
 		if (scanning) {
@@ -125,7 +216,7 @@ public class Player extends Actor implements Sprite, InputProcessor {
 		batch.draw(textureRegion, getX(), getY(), getOriginX(), getOriginY(), getWidth(), getHeight(), getScaleX(),
 				getScaleY(), getRotation());
 	}
-
+	
 	public Infiltrator infiltratorCarrying() {
 		return infiltratorCarrying;
 	}
