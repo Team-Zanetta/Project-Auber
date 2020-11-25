@@ -1,6 +1,8 @@
 package com.zanetta.auber;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+
+import java.util.ArrayList;
 import java.util.Random;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.actions.*;
@@ -8,8 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.actions.*;
 public class Tinkerer extends Infiltrator{
     private TextureRegion Mineregion;
 
-    public Tinkerer(String string) {
-        super(string);
+    public Tinkerer(String string, ArrayList<System> sysList) {
+        super(string, sysList);
         tinkerer_state = Tinkerer_state.wandering;
 
     }
