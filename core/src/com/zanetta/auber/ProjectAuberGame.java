@@ -23,30 +23,37 @@ public class ProjectAuberGame extends ApplicationAdapter {
 		
 		sr = new ShapeRenderer();
 		stage = new Stage();
-		Player player = new Player(Textures.getTexture("player"), sr);
+		Player player = new Player(Textures.getTexture("auber"), sr);
 		mineTexture = new Texture(Gdx.files.internal("badlogic.jpg"));
-		tinkerer = new Tinkerer("tinkerer");
 		stage.addActor(player);
-		stage.addActor(tinkerer);
 		
 		
+		String[] sprites = {"squidmonk", "flameghost", "babymech"};
+		
+		for (int i = 0; i<1; i++) {
+			int rand = (int)(Math.random() * 3);
+			tinkerer = new Tinkerer(sprites[rand]);
+			stage.addActor(tinkerer);
+		}
 		
 		for (int i = 0; i < 15; i++) {
-			Ally ally = new Ally(Textures.getTexture("infiltrator"));
+			int rand = (int)(Math.random() * 3);
+			Ally ally = new Ally(Textures.getTexture(sprites[rand]));
 			ally.setX((float)(Math.random() * stage.getWidth()));
 			ally.setY((float)(Math.random() * stage.getHeight()));
 			stage.addActor(ally);
 		}
 		
 		for (int i = 0; i < 5; i++) {
-			Infiltrator infiltrator = new Infiltrator("infiltrator");
+			int rand = (int)(Math.random() * 3);
+			Infiltrator infiltrator = new Infiltrator(sprites[rand]);
 			infiltrator.setX((float)(Math.random() * stage.getWidth()));
 			infiltrator.setY((float)(Math.random() * stage.getHeight()));
 			stage.addActor(infiltrator);
 		}
 		
 		for (int i = 0; i < 10; i++) {
-			System s1 = new System("System", 3);
+			System s1 = new System("testSystem", 3);
 			s1.setX((float)(Math.random() * stage.getWidth()));
 			s1.setY((float)(Math.random() * stage.getHeight()));
 			stage.addActor(s1);

@@ -31,7 +31,6 @@ public class Infiltrator extends Actor implements Sprite{
         super();
         this.textureName = textureName;
         setTextureRegion(Textures.getTexture(textureName));
-        setSize(this.textureRegion.getRegionWidth(), this.textureRegion.getRegionHeight());
         hasBeenScanned = false;
         state = State.IDLE;
         health = new Health();
@@ -102,7 +101,9 @@ public class Infiltrator extends Actor implements Sprite{
     }
     
     public void scan() {
-    	setTextureRegion(Textures.getTexture(textureName+"Scanned"));
+    	String s = textureName+"-alerted";
+//    	java.lang.System.out.println(s);
+    	setTextureRegion(Textures.getTexture(s));
     	hasBeenScanned = true;
     }
     
