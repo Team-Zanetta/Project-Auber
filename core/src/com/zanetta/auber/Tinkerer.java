@@ -10,8 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.actions.*;
 public class Tinkerer extends Infiltrator{
     private TextureRegion Mineregion;
 
-    public Tinkerer(String string, ArrayList<System> sysList) {
-        super(string, sysList);
+    public Tinkerer(String string) {
+        super(string);
         tinkerer_state = Tinkerer_state.wandering;
 
     }

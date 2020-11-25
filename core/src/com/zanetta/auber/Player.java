@@ -364,13 +364,13 @@ public class Player extends Actor implements Sprite, InputProcessor {
 		
 //		Reduces the relative velocities on button up
 		if(keycode == Keys.RIGHT | keycode == Keys.D) {
-			xVelocity = 0;
+			xVelocity += -1;
 		}if(keycode == Keys.LEFT | keycode == Keys.A) {
-			xVelocity = 0;
+			xVelocity -= -1;
 		}if(keycode == Keys.UP | keycode == Keys.W) {
-			yVelocity  = 0;
+			yVelocity  += -1;
 		}if(keycode == Keys.DOWN | keycode == Keys.S) {
-			yVelocity  = 0;
+			yVelocity  -= -1;
 		}
 			
 		return true;

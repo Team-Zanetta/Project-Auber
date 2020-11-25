@@ -42,10 +42,9 @@ public class ProjectAuberGame extends ApplicationAdapter {
 		
 		sr = new ShapeRenderer();
 		stage = new Stage();
-		Player player = new Player(Textures.getTexture("auber"), sr);
+		Player player = new Player(Textures.getTexture("auber"), sr, layer);
 		mineTexture = new Texture(Gdx.files.internal("badlogic.jpg"));
 		stage.addActor(player);
-		Player player = new Player(Textures.getTexture("player"), (TiledMapTileLayer) map.getLayers().get(0));
 		
 //		Set Position of Player
 		player.setPosition(85,85);
@@ -82,18 +81,7 @@ public class ProjectAuberGame extends ApplicationAdapter {
 			s1.setX((float)(Math.random() * stage.getWidth()));
 			s1.setY((float)(Math.random() * stage.getHeight()));
 			stage.addActor(s1);
-		}
-		
-		sysList.add(s1);
-		sysList.add(s2);
-
-		Infiltrator infiltrator = new Infiltrator("infiltrator", sysList);
-		mineTexture = new Texture(Gdx.files.internal("badlogic.jpg"));
-		tinkerer = new Tinkerer("tinkerer", sysList);
-		stage.addActor(player);
-		stage.addActor(infiltrator);
-		stage.addActor(tinkerer);
-		
+		}		
 		Controller controller = new Controller();
 		stage.addActor(controller);
 		MineDropAI tinkererAI = new MineDropAI(tinkerer);
