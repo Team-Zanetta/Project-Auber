@@ -4,51 +4,51 @@ size: 2048,2048
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-System
-  rotate: false
-  xy: 2004, 2004
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-SystemDestroyed
-  rotate: false
-  xy: 2004, 1936
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-infiltrator
-  rotate: false
-  xy: 36, 2
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-infiltratorScanned
-  rotate: false
-  xy: 2004, 1970
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-player
-  rotate: false
-  xy: 2, 2
-  size: 32, 32
-  orig: 32, 32
-  offset: 0, 0
-  index: -1
-tinkerer
+testEntity
   rotate: false
   xy: 70, 2
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-tinkererScanned
+testEntityScanned
+  rotate: false
+  xy: 2004, 1970
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+testPlayer
+  rotate: false
+  xy: 2004, 2004
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+testSystem
+  rotate: false
+  xy: 2004, 1936
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+testSystemDestroyed
   rotate: false
   xy: 104, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+testTinkerer
+  rotate: false
+  xy: 36, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+testTinkererScanned
+  rotate: false
+  xy: 2, 2
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
@@ -62,14 +62,77 @@ zanetta
   index: -1
 
 auberTextures2.png
-size: 512,512
+size: 512,64
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-badlogic
+auber
+  rotate: false
+  xy: 452, 2
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+babymech
+  rotate: false
+  xy: 252, 2
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+babymech-alerted
+  rotate: false
+  xy: 302, 2
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+babymech-ghost
+  rotate: false
+  xy: 52, 2
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+flameghost
+  rotate: false
+  xy: 152, 2
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+flameghost-alerted
+  rotate: false
+  xy: 102, 2
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+flameghost-ghost
+  rotate: false
+  xy: 352, 2
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+squidmonk
   rotate: false
   xy: 2, 2
-  size: 256, 256
-  orig: 256, 256
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+squidmonk-alerted
+  rotate: false
+  xy: 402, 2
+  size: 48, 48
+  orig: 48, 48
+  offset: 0, 0
+  index: -1
+squidmonk-ghost
+  rotate: false
+  xy: 202, 2
+  size: 48, 48
+  orig: 48, 48
   offset: 0, 0
   index: -1
